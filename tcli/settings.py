@@ -25,7 +25,7 @@ SECRET_KEY = '&4@k)1av*t@3@+i9+b4(nps#pw7&xy41)q1ajwoo#^7^4g+cs5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [tcli-inventory-management.herokuapp.com]
 
 # Application definition
 
