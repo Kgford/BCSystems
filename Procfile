@@ -1,1 +1,1 @@
-web: gunicorn TCLI.wsgi --log-file -
+web: gunicorn tcli.wsgi --log-file -
