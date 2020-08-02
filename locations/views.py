@@ -46,7 +46,7 @@ def searchsite(request):
         site_list = location.objects.all()
     except IOError as e:
         success = False
-        speak.talk ("Sitelist load Failure ", e)    
+        print ("Sitelist load Failure ", e)    
 	 
     if site_list == None:
         success = False

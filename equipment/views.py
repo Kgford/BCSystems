@@ -14,7 +14,7 @@ def searchmodel(request):
         models = Model.objects.all()
     except IOError as e:
         success = False
-        speak.talk ("Models load Failure ", e)
+        print ("Models load Failure ", e)
     if models == None:
         success = False
     else:
@@ -31,7 +31,7 @@ def loadmodel(request):
         model = Model.get(Model.id==model_id)
     except IOError as e:
         success = False
-        speak.talk ("Events Load Failure ", e)
+        print ("Events Load Failure ", e)
     if model == None:
         success = False
     else:
@@ -61,17 +61,17 @@ def index(request):
                 Model.add_new(description, category, band, vendor, model, comments, image_file, active, timestamp)
             except IOError as e:
                 success = False
-                speak.talk ("Models Save Failure ", e)
+                print ("Models Save Failure ", e)
         elif not update==None: 
             try:
 				#update existing event
                 Model.objects.filter(Model.id == model_id).update({'description': description,'category':category,'band=':band,
 					'model':model,'comment':comment,'locationname':locationname,'image_file':image_file,'vendor':vendor,'active':active,'last_update':last_update})
             except IOError as e:
-                speak.talk ("Models Update Failure ", e)	
+                print ("Models Update Failure ", e)	
         elif not delete==None: 
             try:
                 Model.objects.filter(Model.id == model_id).delete()
             except IOError as e:
-                speak.talk ("Models Delete Failure ", e)			
+                print ("Models Delete Failure ", e)			
     return render(request, "equipment/index.html",{"index_type":"EQUIPMENT"})

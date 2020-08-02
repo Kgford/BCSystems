@@ -22,7 +22,7 @@ def index(request):
         print(locations_list)
         shelves_list  = location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
     except IOError as e:
-        speak.talk ("Lists load Failure ", e)
+        print ("Lists load Failure ", e)
         print('error = ',e)        
     return render (request,"inventory/index.html",{"desc_list":desc_list, "models_list":models_list, "locations_list":locations_list, "shelves_list":shelves_list,"index_type":"INVENTORY"})
 
@@ -36,7 +36,7 @@ def searchevents(request,inventory_id):
         events = Events.objects.filter(Events.inventory_id==inventory_id).all()
     except IOError as e:
         success = False
-        speak.talk ("Events load Failure ", e)
+        print ("Events load Failure ", e)
     if events == None:
         success = False
     else:
@@ -52,7 +52,7 @@ def loadevent(request):
         events = Events.objects.get(Events.id==event_id)
     except IOError as e:
         success = False
-        speak.talk ("Events load Failure ", e)
+        print ("Events load Failure ", e)
     if events == None:
         success = False
     else:
@@ -87,19 +87,19 @@ def save_event(request):
 			#update item	
             Inventory.objects.filter(Inventory.id == inventory_id).update({'description': comment,'locationname':locationname,'update_by':operator,'last_update':timestamp,})
         except IOError as e:
-            speak.talk ("Events Save Failure ", e)	
+            print ("Events Save Failure ", e)	
     elif not update==None: 
         try:
 			#update existing event
             Events.objects.filter(Events.id == event_id).update({'event_type': event_type,'locationname':event_date,'update_by':operator,'operator':operator,
 					'comment':comment,'locationname':locationname,'mr':mr,'rma':rma})
         except IOError as e:
-            speak.talk ("Events Update Failure ", e)	
+            print ("Events Update Failure ", e)	
     elif not delete==None: 
         try:
             Events.objects.filter(Events.id == event_id).delete()
         except IOError as e:
-            speak.talk ("Events Update Failure ", e)	
+            print ("Events Update Failure ", e)	
     return HttpResponseRedirect(reverse('inventory/item/'+str(inventory_id)))
 	    
 def items(request):
@@ -147,7 +147,7 @@ def items(request):
             Inventory.add_new(serial_number, model,description, locationname, shelf, category, status, quantity, remarks, purchase_order,
 				 recieved_date, shipped_date, active, last_update, update_by, model_id, location_id, shelf_id)
         except IOError as e:
-            speak.talk ("Inventory Save Failure ", e)
+            print ("Inventory Save Failure ", e)
         return HttpResponseRedirect(reverse('inventory:index'))
     try:
         desc_list = Model.objects.order_by('description').values_list('description', flat=True).distinct()
@@ -155,7 +155,7 @@ def items(request):
         locations_list = location.objects.order_by('name').values_list('name', flat=True).distinct()
         shelves_list = Shelf.objects.order_by('name').values_list('name', flat=True).distinct()
     except IOError as e:
-         speak.talk ("Lists load Failure ", e)	
+         print ("Lists load Failure ", e)	
     return render (request,"locations/items.html", {"desc_list":desc_list, "models_list":models_list,"locationnames_list":locationnames_list, "shelves_list":shelves_list})
 	
 def item(request,inventory_id):
@@ -173,7 +173,7 @@ def item(request,inventory_id):
         shelves_list  = Shelf.objects.order_by('name').values_list('name', flat=True).distinct()
     except IOError as e:
         session.rollback()
-        speak.talk ("Lists load Failure ", e)	
+        print ("Lists load Failure ", e)	
     return render (request,"item.html",{"active_inv":active_inv, "image_file":image_file, "today":date.today(), "locations_list":locations_list, "shelf_list":shelves_list})
     
  
@@ -290,7 +290,7 @@ def search(request):
             inv_list ==None
     except IOError as e:
         nv_list = None
-        speak.talk ("Lists load Failure ", e)
+        print ("Lists load Failure ", e)
     
     if inv_list == None:
         success = False
@@ -315,7 +315,7 @@ def searchall(request):
             return jsonify({"success": success, "inv_list": inv})
     except IOError as e:
         success = False
-        speak.talk ("Inventory load Failure ", e)
+        print ("Inventory load Failure ", e)
         return jsonify({"success": success, "inv_list": inv})
 
 	
