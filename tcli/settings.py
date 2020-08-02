@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(file)))
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -133,9 +131,6 @@ os.makedirs(STATIC_ROOT, exist_ok=True)
 
 
 # Extra lookup directories for collectstatic to find static files
-#STATICFILES_DIRS = (
-#os.path.join(BASE_DIR, 'static'),
-
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )

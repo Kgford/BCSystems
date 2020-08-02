@@ -1,1 +1,1 @@
-web: gunicorn tcli-inventory-management.wsgi --log-file -
+web: gunicorn TCLI.wsgi --log-file -
