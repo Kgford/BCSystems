@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(file)))
 
 # Application definition
 
@@ -124,9 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_TMP = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+os.makedirs(STATIC_TMP, exist_ok=True)
+os.makedirs(STATIC_ROOT, exist_ok=True)
+
+
 # Extra lookup directories for collectstatic to find static files
+#STATICFILES_DIRS = (
+#os.path.join(BASE_DIR, 'static'),
+
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
