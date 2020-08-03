@@ -82,7 +82,8 @@ def save_event(request):
     if not save==None:
         try:
 			#save new event
-            Events.add_new(self, event_type, event_date,operator, comment, locationname, mr, rma, inventory_id)
+            Events.objects.create(event_type=event_type, event_date=event_date, operator=operator, comment=comment, locationname=locationname,
+				  mr=mr, rma=rma, inventory_id=inventory_id)
             
 			#update item	
             Inventory.objects.filter(Inventory.id == inventory_id).update({'description': comment,'locationname':locationname,'update_by':operator,'last_update':timestamp,})
@@ -144,8 +145,10 @@ def items(request):
         print(remarks)
         try:
             # Add new Inventory item
-            Inventory.add_new(serial_number, model,description, locationname, shelf, category, status, quantity, remarks, purchase_order,
-				 recieved_date, shipped_date, active, last_update, update_by, model_id, location_id, shelf_id)
+            Inventory.objects.create(serial_number=serial_number, modelname=modelname,description=description, locationname=locationname, 
+				     shelf=shelf, category=category, status=status, quantity=quantity, remarks= remarks, purchase_order=purchase_order,
+				     recieved_date=recieved_date, shipped_date=shipped_date, active=active, last_update=last_update, update_by=update_by, 
+				     model_id=model_id, location_id=location_id, shelf_id=shelf_id)
         except IOError as e:
             print ("Inventory Save Failure ", e)
         return HttpResponseRedirect(reverse('inventory:index'))
