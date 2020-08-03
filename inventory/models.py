@@ -102,7 +102,7 @@ class Events(models.Model):
     event_type = models.CharField("Item Serial number",max_length=20,null=False,unique=False,default='N/A')  
     event_date = models.DateField(null=True)
     operator = models.CharField("Item Serial number",max_length=50,null=False,unique=False,default='N/A')  
-    commen = models.CharField("Item Serial number",max_length=500,null=False,unique=False,default='N/A')  
+    comment = models.CharField("Item Serial number",max_length=500,null=False,unique=False,default='N/A')  
     locationname = models.CharField("Item Serial number",max_length=50,null=False,unique=False,default='N/A')  
     mr = models.CharField("Item Serial number",max_length=20,null=False,unique=False,default='N/A')  
     rma = models.CharField("Item Serial number",max_length=20,null=False,unique=False,default='N/A')  
