@@ -25,7 +25,7 @@ SECRET_KEY = '&4@k)1av*t@3@+i9+b4(nps#pw7&xy41)q1ajwoo#^7^4g+cs5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tcli-inventory-management.herokuapp.com", "localhost", "127.0.0.1:8000" ]
+ALLOWED_HOSTS = ["tcli-inventory-management.herokuapp.com", "localhost", "127.0.0.1" ]
 
 # Application definition
 
@@ -136,11 +136,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = "/static/"
 
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 
