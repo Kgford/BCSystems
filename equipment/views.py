@@ -58,7 +58,8 @@ def index(request):
         
         if not save==None:	
             try:		
-                Model.add_new(description, category, band, vendor, model, comments, image_file, active, timestamp)
+                Model.objects.create(description=description, category=category, band=band, vendor=vendor, model=model, 
+				     comments=comments, image_file=image_file, status=active, last_update=timestamp)
             except IOError as e:
                 success = False
                 print ("Models Save Failure ", e)
