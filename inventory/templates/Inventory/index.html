@@ -1,5 +1,5 @@
 {% extends "inventory/layout.html" %}
-{% load static from staticfiles %}
+{% load static %}
 
 {% block title %}
     {{ index_type }}
@@ -42,11 +42,16 @@
 		</div>
 	</nav>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-	<div id="load"></div>
-	<div id="contents">
-		  
+	<div id="load">
+		<p class="aligncenter">
+			<a>Loading inventory</a>
 	</div>
-	<h4 class="text-center">Inventory Search</h4>
+	<div id="contents">
+		<p class="aligncenter">
+			<img src="{% static 'inventory/images/loader.gif' %}" alt="centered image" /> 
+		</p>	
+	</div>
+	<h4 class="text-center">TCLI Inventory Search</h4>
         <form action="{% url 'inventory:index' %}" method="post">
 		
 			<div class="row">

@@ -15,12 +15,9 @@ def index(request):
     shelves_list = []
     try:
         desc_list = Model.objects.order_by('description').values_list('description', flat=True).distinct()
-        print(desc_list)
         models_list = Model.objects.order_by('model').values_list('model', flat=True).distinct()
-        print(models_list)
-        locations_list = location.objects.order_by('name').values_list('name', flat=True).distinct()
-        print(locations_list)
-        shelves_list  = location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
+        locations_list = location.objects.order_by('locationname').values_list('locationname', flat=True).distinct()
+        shelves_list = location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
     except IOError as e:
         print ("Lists load Failure ", e)
         print('error = ',e)        
@@ -146,9 +143,9 @@ def items(request):
         try:
             # Add new Inventory item
             Inventory.objects.create(serial_number=serial_number, modelname=modelname,description=description, locationname=locationname, 
-				     shelf=shelf, category=category, status=status, quantity=quantity, remarks= remarks, purchase_order=purchase_order,
-				     recieved_date=recieved_date, shipped_date=shipped_date, active=active, last_update=last_update, update_by=update_by, 
-				     model_id=model_id, location_id=location_id, shelf_id=shelf_id)
+            shelf=shelf, category=category, status=status, quantity=quantity, remarks= remarks, purchase_order=purchase_order,
+            recieved_date=recieved_date, shipped_date=shipped_date, active=active, last_update=last_update, update_by=update_by, 
+            model_id=model_id, location_id=location_id, shelf_id=shelf_id)
         except IOError as e:
             print ("Inventory Save Failure ", e)
         return HttpResponseRedirect(reverse('inventory:index'))
@@ -156,10 +153,10 @@ def items(request):
         desc_list = Model.objects.order_by('description').values_list('description', flat=True).distinct()
         models_list = Model.objects.order_by('model').values_list('model', flat=True).distinct()
         locations_list = location.objects.order_by('name').values_list('name', flat=True).distinct()
-        shelves_list = Shelf.objects.order_by('name').values_list('name', flat=True).distinct()
+        shelves_list = location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
     except IOError as e:
          print ("Lists load Failure ", e)	
-    return render (request,"locations/items.html", {"desc_list":desc_list, "models_list":models_list,"locationnames_list":locationnames_list, "shelves_list":shelves_list})
+    return render (request,"locations/items.html", {"desc_list":desc_list, "models_list":models_list,"locations_list":locations_list, "shelves_list":shelves_list})
 	
 def item(request,inventory_id):
     locations_list = []
@@ -167,13 +164,13 @@ def item(request,inventory_id):
 	#Get locationname
     active_inv = Inventory.objects.get(Inventory.id==inventory_id)
     model = Model.objects.get(Model.model__contains==active_inv.model)
-    image_file = 'assets/images/',model.image_file
+    image_file = 'inventory/images/',model.image_file
     print(image_file)
     if image_file == None:
-	    image_file = 'assets/images/inv1.jpg'
+	    image_file = 'inventory/images/inv1.jpg'
     try:
-        locations_list = location.objects.order_by('name').values_list('name', flat=True).distinct()
-        shelves_list  = Shelf.objects.order_by('name').values_list('name', flat=True).distinct()
+        locations_list = location.objects.order_by('locationname').values_list('locationname', flat=True).distinct()
+        shelves_list  = location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
     except IOError as e:
         session.rollback()
         print ("Lists load Failure ", e)	

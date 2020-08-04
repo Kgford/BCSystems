@@ -18,7 +18,7 @@
 			<a class="nav-link" href="{% url 'logout' %}"Sign out</a>
 		  </li>
 		</ul>
-    </nav>
+    
 	<div class="container-fluid">
 	  <div class="row">
 		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -54,11 +54,14 @@
 					  Sign out
 					</a>
 				 </li>
-			 </ul>
+			   </li> 
+			</ul>
 		</div>
+	 </div>
 	</nav>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<input type='hidden' id = '_id' value = {{active_inv.id}} name='inventory_id' data-select='inventory_id'/>
 			<h1 class="h2">Create New Inventory Item</h1>
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">

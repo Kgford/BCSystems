@@ -1,5 +1,5 @@
 {% extends "equipment/layout.html" %}
-{% load static from staticfiles %}
+{% load static %}
 
 {% block title %}
     {{ index_type }}
@@ -15,7 +15,7 @@
 		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
 		<ul class="navbar-nav px-3">
 		  <li class="nav-item text-nowrap">
-			<a class="nav-link" href="{% url 'logout' %}"Sign out</a>
+			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
 		  </li>
 		</ul>
     </nav>
@@ -51,7 +51,7 @@
 				  <li class="nav-item">
 					<a class="nav-link" href="{% url 'logout' %}">
 					  <span data-feather="layers"></span>
-					  Sign out
+					  Log out
 					</a>
 				 </li>
 			 </ul>
