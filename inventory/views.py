@@ -4,8 +4,9 @@ from django.http import HttpResponseRedirect
 from datetime import date
 from django.urls import reverse
 from equipment.models import Model
-from locations.models import location
+from locations.models import Location
 from inventory.models import Inventory, Events
+import datetime
 
 # Create your views here.
 def index(request):
@@ -16,11 +17,53 @@ def index(request):
     try:
         desc_list = Model.objects.order_by('description').values_list('description', flat=True).distinct()
         models_list = Model.objects.order_by('model').values_list('model', flat=True).distinct()
-        locations_list = location.objects.order_by('locationname').values_list('locationname', flat=True).distinct()
-        shelves_list = location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
+        locations_list = Location.objects.order_by('name').values_list('name', flat=True).distinct()
+        shelves_list = Location.objects.order_by('shelf').values_list('shelf', flat=True).distinct()
     except IOError as e:
         print ("Lists load Failure ", e)
-        print('error = ',e)        
+        print('error = ',e) 
+
+    '''
+    #~~~~~~~~~~~Load Item database from csv. must put this somewhere else later"
+    import csv
+    timestamp  = date.today()
+    CSV_PATH = 'items.csv'
+    print('csv = ',CSV_PATH)
+
+    contSuccess = 0
+    # Remove all data from Table
+    Inventory.objects.all().delete()
+
+    f = open(CSV_PATH)
+    reader = csv.reader(f)
+    print('reader = ',reader)
+    for serial_number, modelname,description, locationname,shelf, category,status, quantity, remarks, recieved_date,shipped_date,last_update, update_by in reader:
+        Inventory.objects.create(serial_number=serial_number, modelname=modelname, description=description, locationname=locationname,
+        shelf=shelf, category=category,status=status, quantity=quantity, remarks=remarks, recieved_date=datetime.datetime.strptime(recieved_date, '%m/%d/%Y'),
+        shipped_date=datetime.datetime.strptime(shipped_date, '%m/%d/%Y'), last_update=datetime.datetime.strptime(last_update, '%m/%d/%Y'), update_by=update_by)
+        contSuccess += 1
+    print(f'{str(contSuccess)} inserted successfully! ')
+    
+    #~~~~~~~~~~~Load Events database from csv. must put this somewhere else later"       
+    #~~~~~~~~~~~Load Events database from csv. must put this somewhere else later"
+    CSV_PATH = 'events.csv'
+    print('csv = ',CSV_PATH)
+
+    contSuccess = 0
+    # Remove all data from Table
+    Events.objects.all().delete()
+
+    f = open(CSV_PATH)
+    reader = csv.reader(f)
+    print('reader = ',reader)
+    for event_type, event_date, operator, comment,locationname, inventory_id ,mr, rma in reader:
+        Events.objects.create(event_type=event_type, event_date=datetime.datetime.strptime(event_date, '%m/%d/%Y'), operator=operator,comment=comment, locationname=locationname, mr=mr, rma =rma, inventory_id=inventory_id)
+        contSuccess += 1
+    print(f'{str(contSuccess)} inserted successfully! ')
+    
+    #~~~~~~~~~~~Load Events database from csv. must put this somewhere else later"   
+    '''   
+    
     return render (request,"inventory/index.html",{"desc_list":desc_list, "models_list":models_list, "locations_list":locations_list, "shelves_list":shelves_list,"index_type":"INVENTORY"})
 
 

@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from datetime import date
 from django.urls import reverse
 from equipment.models import Model
+from datetime import date, datetime
 
 # Create your Equipment views here.
 def searchmodel(request):
@@ -31,7 +32,7 @@ def loadmodel(request):
         model = Model.get(Model.id==model_id)
     except IOError as e:
         success = False
-        print ("Events Load Failure ", e)
+        print ("Eventss Load Failure ", e)
     if model == None:
         success = False
     else:
@@ -74,5 +75,26 @@ def index(request):
             try:
                 Model.objects.filter(Model.id == model_id).delete()
             except IOError as e:
-                print ("Models Delete Failure ", e)			
+                print ("Models Delete Failure ", e)
+    '''                
+    #~~~~~~~~~~~Load equpment database from csv. must put this somewhere else later"
+    import csv
+    timestamp  = date.today()
+    CSV_PATH = 'models.csv'
+    print('csv = ',CSV_PATH)
+
+    contSuccess = 0
+    # Remove all data from Table
+    Model.objects.all().delete()
+
+    f = open(CSV_PATH)
+    timestamp  = date.today()
+    reader = csv.reader(f)
+    print('reader = ',reader)
+    for description, category, band, model, vendor, status, last_update in reader:
+        Model.objects.create(description=description, category=category, band=band, model=model,vendor=vendor,status=status,last_update=timestamp)
+        contSuccess += 1
+    print(f'{str(contSuccess)} inserted successfully! ')
+    #~~~~~~~~~~~Load equpment database from csv. must put this somewhere else later"
+    '''
     return render(request, "equipment/index.html",{"index_type":"EQUIPMENT"})

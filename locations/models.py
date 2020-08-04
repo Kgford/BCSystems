@@ -2,7 +2,7 @@ from django.db import models
 from inventory.models import Inventory
 
 # Create your locaions models here.
-class location(models.Model):   
+class Location(models.Model):   
     id = models.AutoField(primary_key=True)
     name = models.CharField("location name",max_length=100,null=False,unique=True)
     address = models.CharField("location address",max_length=100,null=False,unique=False,default='N/A')    	
