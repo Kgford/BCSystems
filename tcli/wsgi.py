@@ -8,18 +8,10 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
-from whitenoise import WhiteNoise
+from whitenoise.django import DjangoWhiteNoise
 
-#from my_project import MyWSGIApp
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tcli.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bootcamp.settings")
 
 application = get_wsgi_application()
-
-#application = MyWSGIApp()
-#application = WhiteNoise(application, root='../../static')
-#application.add_files('../../inventory/static/, prefix='more-files/')
-#application.add_files('../../locations/static/, prefix='more-files/')
-#application.add_files('../../equipment/static/, prefix='more-files/')
+application = DjangoWhiteNoise(application)
