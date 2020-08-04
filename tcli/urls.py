@@ -19,10 +19,10 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include("users.urls")),
+    path('inventory/', include("inventory.urls")),
     path('locations/', include("locations.urls")),
     path('equipment/', include("equipment.urls")),
-    path('inventory/', include("inventory.urls")),
     ]
 
-#if settings.DEBUG:
-#    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
