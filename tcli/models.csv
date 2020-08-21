@@ -1,0 +1,101 @@
+DUAL 1:1 REDUNDANT CONTROLLER,Controller,N/A,Paradise Datacom,RCPD-1100-L1,Active,8/3/2020
+DUAL 1:1 REDUNDANT CONTROLLER,Controller,N/A,Specialty Microwave,14386-500,Active,8/3/2020
+L-Band Modem,Modem,L-Band,Comtech ED Data,CDM570AL,Active,8/3/2020
+L-Band Modem Refurbished,Modem,L-Band,Comtech ED Data,CDM570L,Active,8/3/2020
+Moem Switch,Switch,L-Band,Comtech ED Data,CRS-170,Active,8/3/2020
+4 WATT Ku-BAND BUC,BUC,Ku-Band,Paradise Datacom,31K-04A563TXX,Obsolete,8/3/2020
+SPECIALTY Power Supply,Controller,N/A,Specialty Microwave,6600-600-1,Not Active,8/3/2020
+10W C_Band VBUC,BUC,C-Band,Paradise Datacom,VBUCC10AXXXXXX,Active,8/3/2020
+10W Ku_Band VBUC,BUC,Ku-Band,Paradise Datacom,VBUCK10AXXXXXX,Active,8/3/2020
+"8 Watt, Ku-Band BUC",BUC,Ku-Band,CPI,4908L,Active,8/3/2020
+"10 Watt, C-Band BUC",BUC,C-Band,CPI,4710L,Active,8/3/2020
+CPI BUC Plate Harness,BUC Plate,N/A,603 Manufacture,210698-05011,Active,8/3/2020
+C-Band and vBUCs Harness,BUC Plate,N/A,Paradise Datacom,L204196-1,Not Active,8/3/2020
+KU-BAND BUC HARNESS,BUC Plate,N/A,Paradise Datacom,L204195-1,Not Active,8/3/2020
+"Dehydrator, Disposable 115VAC",Site,N/A,Andrew,DDH010-31015,Not Active,8/3/2020
+"Pole Mount Dehydrator, 115VAC",Site,N/A,ETI,EDH-5,Not Active,8/3/2020
+KU desiccant Bottle,Site,N/A,,SD003 UV,Not Active,8/3/2020
+Replacement desiccant field replacable,Site,N/A,,18138PKG,Not Active,8/3/2020
+"UPS, Rack Mount",UPS,N/A,APC,SRTA2200RMXLA,Not Active,8/3/2020
+AIRCRAFT FILTER,Feed,C-Band,,7898D,Not Active,8/3/2020
+C-Band Feed Assy,Feed,C-Band,,,Not Active,8/3/2020
+Ku-Band Feed Assy,Feed,Ku-Band,,,Not Active,8/3/2020
+Ku-band rx/tx cross pol feed only ,Feed,Ku-Band,,0800-1789,Not Active,8/3/2020
+Ku LNB,LNB,Ku-Band,,HS1057AN,Not Active,8/3/2020
+C LNB,LNB,C-Band,,3120N,Not Active,8/3/2020
+vac moisture grid,De-Ice,N/A,,d1995 120 ,Not Active,8/3/2020
+snap disc,De-Ice,N/A,,e1631 l-180f ,Not Active,8/3/2020
+snap disc,De-Ice,N/A,,e1635 l-135s ,Not Active,8/3/2020
+snap disc,De-Ice,N/A,,e1645 f-45 ,Not Active,8/3/2020
+Contactor,De-Ice,N/A,,,Not Active,8/3/2020
+Remote Control Panel,De-Ice,N/A,Walton Enterprizes,DP-7SS,Active,8/3/2020
+4kw electric heater system,De-Ice,N/A,,,Not Active,8/3/2020
+6 inch de-ice ducting kit,De-Ice,N/A,GD,M7036,Active,8/3/2020
+7 inch de-ice ducting kit,De-Ice,N/A,GD,M7037,Active,8/3/2020
+2.4m Passive snow shield cover,De-Ice,N/A,,,Not Active,8/3/2020
+2.4M VERTEX FEED DE-ICE FEED COVER,De-Ice,N/A,,,Not Active,8/3/2020
+2.4m C band feed horn cover,De-Ice,N/A,,,Not Active,8/3/2020
+C-Band RX Switch,W/G Switch,C-Band,Sector Microwave Corp.,2SBGS (SM2S-1925-1),Not Active,8/3/2020
+C-Band RX Switch Head,W/G Switch,C-Band,Sector Microwave Corp.,,Not Active,8/3/2020
+C-Band TX Switch ,W/G Switch,C-Band,Sector Microwave Corp.,SM3D-1514,Not Active,8/3/2020
+K/U waveguide Switch ,W/G Switch,Ku-Band,Sector Microwave Corp.,75BOS,Not Active,8/3/2020
+K/U waveguide Switch ,W/G Switch,Ku-Band,Sector Microwave Corp.,SM3D-1514 DH,Not Active,8/3/2020
+K/U waveguide Switch ,W/G Switch,Ku-Band,Sector Microwave Corp.,75BPS,Not Active,8/3/2020
+C-Band Harness ,BUC Plate,C-Band,Paradise Datacom,L204196-1,Not Active,8/3/2020
+K/U Harness ,BUC Plate,Ku-Band,Paradise Datacom,L204195-1,Not Active,8/3/2020
+Shelter Air Conditioner Compac II ,A/C,N/A,,AVPA12ACA036C-A5,Not Active,8/3/2020
+MUX Chassis ,Mini Mux,N/A,,036M333-129,Not Active,8/3/2020
+MUX Expansion Chassis,Mini Mux,N/A,,036B016-001,Not Active,8/3/2020
+ACT Surge Protection Device,Site,N/A,,ACT-452-120S-040,Not Active,8/3/2020
+FXO/FXS Modules,Analog,N/A,Tellabs,6131,Not Active,8/3/2020
+ 1.2m Ku-Band Flyaways ,Fly-Away,Ku-Band,GSI,,Not Active,8/3/2020
+2.4m C-Band Flyaway,Fly-Away,C-Band,GSI,,Not Active,8/3/2020
+ 2.4m C and Ku-Band Transportable Trailer ,Trailer,C/Ku-Band,GSI,,Not Active,8/3/2020
+ 3.8m Ku Mobile Gateway Transportable Trailer ,Trailer,Ku-Band,GSI,,Not Active,8/3/2020
+LMR400 CONNECTOR,,,,,Not Active,8/3/2020
+KU PRESSURE INLET,Waveguide,Ku-Band,,,Not Active,8/3/2020
+,,,,,Not Active,8/3/2020
+WR137-N TRANSITION,Waveguide,C-Band,Speciality Microwave,,Not Active,8/3/2020
+WR229 TERMINATION,Waveguide,C-Band,Speciality Microwave,,Not Active,8/3/2020
+WR229 WAVEGUIDE ELBOW,Waveguide,C-Band,Speciality Microwave,,Not Active,8/3/2020
+Ku-band wavegude 90 degree bend,Waveguide,Ku-Band,Speciality Microwave,,Not Active,8/3/2020
+Ku-band wavegude 90 degree bend,Waveguide,Ku-Band,Speciality Microwave,,Not Active,8/3/2020
+Auto Frame Card,Mini Mux,N/A,General Datacomm,036P307-002,Active,8/3/2020
+Channel INTF,TMS,N/A,General Datacomm,036P304-003,Active,8/3/2020
+Redund. Cntrl,TMS,N/A,General Datacomm,036P302-001,Active,8/3/2020
+ACM CARD,TMS,N/A,General Datacomm,036M335-002,Active,8/3/2020
+CDA CARD,TMS,N/A,General Datacomm,036P309-003,Active,8/3/2020
+AGGR CARD/ACC NO INTERFACE CARD,TMS,N/A,General Datacomm,036M313-006,Active,8/3/2020
+ESCC CARD,TMS,N/A,General Datacomm,036M337-001,Active,8/3/2020
+TR Logic Card,Mini Mux,N/A,General Datacomm,036P037-021,Active,8/3/2020
+PCM Voice CH with no piggyback cards,Mini Mux,N/A,General Datacomm,036P265-003,Active,8/3/2020
+PCM Voice CH with piggyback card,Mini Mux,N/A,General Datacomm,036P265-003,Active,8/3/2020
+UDC V.232,Mini Mux,N/A,General Datacomm,036M078-001,Active,8/3/2020
+UDC V.35,Mini Mux,N/A,General Datacomm,036M078-004,Active,8/3/2020
+UDC V4.22,Mini Mux,N/A,General Datacomm,036M078-002,Active,8/3/2020
+TDM - Clock Cards,Mini Mux,N/A,General Datacomm,036M176-001,Active,8/3/2020
+Expansion Card,TMS,N/A,General Datacomm,036P307-002,Active,8/3/2020
+AutoFrame Card,Mini Mux,N/A,General Datacomm,036M249-001,Active,8/3/2020
+Sync Status Card,Mini Mux,N/A,General Datacomm,036P351-002,Active,8/3/2020
+Sync Status Card,Mini Mux,N/A,General Datacomm,036P351-003,Active,8/3/2020
+Expansion Chassis,Mini Mux,N/A,General Datacomm,036B301-001,Active,8/3/2020
+TMS MAIN SHELF,TMS,N/A,General Datacomm,036B300-001,Active,8/3/2020
+Expansion Shelf,TMS,N/A,General Datacomm,036M302-002,Active,8/3/2020
+Clock Program PCB- Various rates,Mini Mux,N/A,General Datacomm,036P601-001,Active,8/3/2020
+Minimux Aggr CD,Mini Mux,N/A,General Datacomm,G036P192-001,Active,8/3/2020
+Autoframe Pluggin Cards,Mini Mux,N/A,General Datacomm,036P049-001,Active,8/3/2020
+NO DESCRIPTION,Mini Mux,N/A,General Datacomm,039P043-001,Active,8/3/2020
+Cable Assmbly,Mini Mux,N/A,General Datacomm,G036W101-001,Active,8/3/2020
+Cable Assmbly,Mini Mux,N/A,General Datacomm,G063W193-001,Active,8/3/2020
+Universal loopback test plug,Mini Mux,N/A,General Datacomm,029H014-001,Active,8/3/2020
+Expansion Mother Board,Mini Mux,N/A,General Datacomm,G036P012-001,Active,8/3/2020
+MiniMux Mother Board,Mini Mux,N/A,General Datacomm,G036P190-002,Active,8/3/2020
+Expansion Shelf - HUB,TMS,N/A,General Datacomm,036M302-002,Active,8/3/2020
+ACC Base CD,TMS,N/A,General Datacomm,036P313-009,Active,8/3/2020
+ACC Mezzanine CD,TMS,N/A,General Datacomm,036P314-001,Active,8/3/2020
+Mux Main Chassis,Mini Mux,N/A,General Datacomm,036M333-129,Active,8/3/2020
+521A/S module,FSX/FXO,N/A,Tellabs,076M028-001,Active,8/3/2020
+SCM Management Module,SC-90,N/A,General Datacomm,058P150-002,Active,8/3/2020
+SC2000 Shelf,SC-90,N/A,General Datacomm,NA,Active,8/3/2020
+553,FSX/FXO,N/A,Tellabs,NA,Active,8/3/2020
+GPS-8B POWER SUPPLY,TMS,N/A,General Datacomm,3500973,Active,8/3/2020

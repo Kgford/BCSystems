@@ -1,0 +1,218 @@
+{% extends "equipment/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+<body>
+   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">TCLI Inventory Manager</a>
+		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		<ul class="navbar-nav px-3">
+		  <li class="nav-item text-nowrap">
+			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+		  </li>
+		</ul>
+    </nav>
+	<div class="container-fluid">
+	  <div class="row">
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+		  <div class="sidebar-sticky pt-3">
+			<ul class="nav flex-column">
+			     <li class="nav-item">
+					<a class="nav-link active" href="{% url 'index' %}">
+					  <span data-feather="home"></span>
+					  Home <span class="sr-only">(current)</span>
+					</a>
+			    </li>
+				<li class="nav-item">
+					<a class="nav-link active" href="{% url 'inventory:inven' %}">
+					  <span data-feather="home"></span>
+					  Search Inventory <span class="sr-only">(current)</span>
+					</a>
+			    </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'inventory:items' %}">
+					  <span data-feather="file"></span>
+					  Create Inventory items
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'equipment:equipment' %}">
+					  <span data-feather="file"></span>
+					  Add Equipment
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'locations:location' %}">
+					  <span data-feather="users"></span>
+					  Add Site locations
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'logout' %}">
+					  <span data-feather="layers"></span>
+					  Log out
+					</a>
+				 </li>
+			 </ul>
+		</div>
+	</nav>
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+	    <input type='hidden' id = 'm_id' value = "" name='m_id' data-select='inventory_id'/>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1 class="h2">Equipment Item</h1>
+			<div class="btn-toolbar mb-2 mb-md-0">
+				<div class="btn-group mr-2">
+					<button type="button" id = "share" class="btn btn-sm btn-outline-secondary">Share</button>
+					<button type="button" id = "export" class="btn btn-sm btn-outline-secondary">Export</button>
+				</div>
+			</div>
+		</div>
+		<form action = "{% url 'equipment:savemodel' %}"  method="post">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label>Band <span class="k-required"></span></label>
+						<input type='hidden' name='models' data-select='_band'/>
+						<select id='_band' name = "_band" value = "{{mod.band}}" class="browser-default custom-select custom-select-lg mb-3" >
+							<option selected>{{mod.band}}</option>
+							<option data-desc = 'band', data-val = "n-a">N/A</option>
+							<option data-desc = 'band', data-val = "l-band">L-Band</option>
+							<option data-desc = 'band', data-val = "C-band">C-Band</option>
+							<option data-desc = 'band', data-val = "x-band">X-Band</option>
+							<option data-desc = 'band', data-val = "ku-band">Ku-Band</option>
+							<option data-desc = 'band', data-val = "ka-band">Ka-Band</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					 <div class="form-group">
+						<label>Category<span class="k-required"></span></label>
+						<input type='hidden' name='category' data-select='category'/>
+						<select id='_category' name = "_category" value = "{{mod.category}}" class="browser-default custom-select custom-select-lg mb-3" >
+							<option selected>{{mod.category}}</option>
+							<option data-desc = 'equipment', data-val = "modem">MODEM</option>
+							<option data-desc = 'equipment', data-val = "buc">BUC</option>
+							<option data-desc = 'equipment', data-val = "bdc">BDC</option>
+							<option data-desc = 'equipment', data-val = "lna">LNA</option>
+							<option data-desc = 'equipment', data-val = "lnb">LNB</option>
+							<option data-desc = 'equipment', data-val = "amp">AMPLFIER</option>
+							<option data-desc = 'equipment', data-val = "ant">ANTENNA</option>
+							<option data-desc = 'equipment', data-val = "contr">CONTROLLER</option>
+							<option data-desc = 'equipment', data-val = "pcb">PCBOARD</option>
+						</select>
+					</div>	
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-sm-1 col-lg-4 grid-col">
+					<div class="form-group">
+						<label for="_desc">Description</label>
+						<input id = "_desc" name = "_desc" input class="form-control" value = "{{mod.description}}" placeholder="Enter description"  required >
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_model">Model/Part</label>
+						<input id = "_model"  name = "_model" value = "{{mod.model}}" input class="form-control"  placeholder="Enter Model"  required autofocus>
+					</div>	
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_vendor">Vendor</label>
+						<input id = "_vendor" name = "_vendor" input class="form-control" value = "{{mod.vendor}}" placeholder="Enter Vendor"  required autofocus>
+					</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col-sm-3 col-lg-4 grid-col">
+					<div class="form-group">
+						<label>Comments: </label><br>
+						<textarea id="_comments" name = "_comments rows="3" cols="68" style="align-content:left">{{mod.comments}}</textarea>
+						</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col-sm-3 col-lg-4 grid-col">
+					<div class="form-group">
+					    <label for="fileupload"> Select an Equipment Image</label> 
+						<input type="file" name="fileupload" value="{{image_file}}" id="fileupload"> 
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 col-lg-3 grid-col">
+					<div class="thumbnail">
+					    <img src="{% static image_file %}" class="img-responsive" alt="Cinque Terre">
+						<div class="caption" >
+							<p id = "_md" name = '_md' >Model: {{mod.model}}</p>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1 col-lg-1 grid-col">
+					<div class="form-group">
+						<input type="submit" id = "_save" name = "_save" data-search="save"  value="Save Model">
+					</div>
+				</div>
+				<div class="col-sm-1 col-lg-1 grid-col">
+					<div class="form-group">
+						<input type="submit" id = "_update" name = "_update" data-update="save"  value="Update Model">
+					</div>
+				</div>
+				<div class="col-sm-1 col-lg-1 grid-col">
+					<div class="form-group">
+						<input type="submit" id = "_delete" name = "_delete" data-update="save"  value="Delete Model">
+					</div>
+				</div>
+			</div>
+		</form>
+		<h2 class="text-center">Equipment List</h2>
+		<div class="table-responsive" Method = "POST">
+			 <table id = "table_id" class="table table-striped table-sm">
+			    <thead>
+					<tr>
+					  <th>ID</th>
+					  <th>Description</th>
+					  <th>Category</th>
+					  <th>Band</th>
+					  <th>Model</th>
+					  <th>Vendor</th>
+					  <th>Status</th>
+					</tr>
+			    </thead>
+				<tbody>
+					{% for model in models %}
+						<tr>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.id}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.description}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.category}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.band}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.model}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.vendor}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id">{{model.status}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+    </main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>                           
+</body>
+{% endblock %}
+
+</html>
