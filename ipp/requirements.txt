@@ -1,0 +1,10 @@
+dj-database-url
+django_heroku
+gunicorn
+psycopg2
+pytz
+whitenoise
+django-contrib-comments
+Pillow
+django-session-timeout
+

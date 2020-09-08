@@ -1,0 +1,248 @@
+{% extends "inventory/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+<body >
+  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">TCLI Inventory Manager</a>
+		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		<ul class="navbar-nav px-3">
+		  <li class="nav-item text-nowrap">
+			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+		  </li>
+		</ul>
+    </nav>
+	<div class="container-fluid">
+	  <div class="row">
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+		  <div class="sidebar-sticky pt-3">
+			<ul class="nav flex-column">
+			     <li class="nav-item">
+					<a class="nav-link active" href="{% url 'index' %}">
+					  <span data-feather="home"></span>
+					  Home <span class="sr-only">(current)</span>
+					</a>
+			    </li>
+				<li class="nav-item">
+					<a class="nav-link active" href="{% url 'inventory:inven' %}">
+					  <span data-feather="home"></span>
+					  Search Inventory <span class="sr-only">(current)</span>
+					</a>
+			    </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'inventory:items' %}">
+					  <span data-feather="file"></span>
+					  Save/Modify Inventory
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'equipment:equipment' %}">
+					  <span data-feather="file"></span>
+					  Save/Modify Equipment
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'locations:location' %}">
+					  <span data-feather="users"></span>
+					  Save/Modify Site locations
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'logout' %}">
+					  <span data-feather="layers"></span>
+					  Log out
+					</a>
+				 </li>
+			 </ul>
+		</div>
+	</nav>
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+	    <input type='hidden' id = '_id' value = {{active_inv.id}} name='inventory_id' data-select='inventory_id'/>
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1 class="h2">Inventory Item #{{active_inv.id}}</h1>
+			<div class="btn-toolbar mb-2 mb-md-0">
+				<div class="btn-group mr-2">
+					<button type="button" id = "share" class="btn btn-sm btn-outline-secondary">Share</button>
+					<button type="button" id = "export" class="btn btn-sm btn-outline-secondary">Export</button>
+				</div>
+			</div>
+		</div>
+		<form action = {% url 'inventory:save_event' %}  method="post">
+		    {% csrf_token %}
+			<div class="row">
+				<div class="col-sm-5 col-lg-6 grid-col">
+					<div class="form-group">
+						<label>Inventory Item</label>
+						<p class = 'row_' id = '_street'>Category: {{active_inv.category}}</p>
+						<p class = 'row_' id = '_status'>Status: {{active_inv.status}}</p>
+						<p class = 'row_' id = '_desc'>Description: {{active_inv.description}}</p>
+						<p class = 'row_' id = '_loc'>Location: {{active_inv.locationname}}</p>
+						<p class = 'row_' id = '_shelf'>Shelf: {{active_inv.shelf}}</p>
+						<p class = 'row_' id = '_street'>Last Update: {{active_inv.last_update}}</p>
+						<a class = 'row_' id = '_street'>By: {{active_inv.update_by}}</a>
+					</div>
+				</div>
+				
+				<div class="col-sm-2 col-lg-3 grid-col">
+					<div class="thumbnail">
+						<img src="{% static 'inventory/images/inv1.jpg' %}" class="img-responsive" alt="Cinque Terre">
+						<div class="caption" >
+							<p>Model:{{active_inv.model}}</p>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<h3 id ='_event_change' name ='_event_change'  >Add new Event</h2>
+			<hr class="my-2">
+			
+			<div class="row">	
+			    <div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_date">Event Date</label>
+						{% if event != 'n/a' %}
+							<input id = "_date"  name = "_date" input class="form-control" value = {{event.date}} required>
+						{% else %}
+							<input id = "_date"  name = "_date" input class="form-control" placeholder={{today}}  required>
+						{% endif %}
+					</div>	
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					 <div class="form-group">
+						<label>Event Type<span class="k-required"></span></label>
+						<input type='hidden' name='event' data-select='event'/>
+						{% if event != 'n/a' %}
+							<select id='_event' name = '_event'  class="browser-default custom-select custom-select-lg mb-3" >
+						{% else %}
+							<select id='_event' name = '_event'  class="browser-default custom-select custom-select-lg mb-3" value = {{event.type}} >
+						{% endif %}
+							<option selected>Enter Type</option>
+							<option data-desc = 'equipment', value = "standard">STD</option>
+							<option data-desc = 'equipment', value = "rma">RMA</option>
+							<option data-desc = 'equipment', value = "mr">MR</option>
+							<option data-desc = 'equipment', value = "repair">REPAIR</option>
+							<option data-desc = 'equipment', value = "update">UPDATE</option>
+							<option data-desc = 'equipment', value = "remove">REMOVE</option>
+						</select>
+					</div>	
+				</div>
+			    <div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label>Site: <span class="k-required"></span></label>
+						<input type='hidden' name='_loc' id='_loc' data-select='loc'/>
+						{% if event != 'n/a' %}
+							<select id='_loc' name = '_loc'  value = {{event.location}} class="browser-default custom-select custom-select-lg mb-3" >
+						{% else %}
+							<select id='_loc' name = '_loc' class="browser-default custom-select custom-select-lg mb-3" >
+						{% endif %}
+							<option selected>select location</option>
+							{% for location in locations_list %}
+								<option data-desc = 'location', data-val = "{{location}}">{{location}}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-lg-4 grid-col">
+						<div class="form-group">
+							<label for="_po">RMA</label>
+							{% if event != 'n/a' %}
+								<input id = "_rma"  name = "_rma" input class="form-control" value = {{event.rma}}>
+							{% else %}
+								<input id = "_rma"  name = "_rma" input class="form-control" placeholder="Enter RMA">
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-sm-2 col-lg-4 grid-col">
+						<div class="form-group">
+							<label for="_mr">MR</label>
+							{% if event != 'n/a' %}
+								<input id = "_mr"  name = "_mr" input class="form-control" value = {{event.rmr}}>
+							{% else %}
+								<input id = "_mr"  name = "_mr" input class="form-control" placeholder="Enter MR">
+							{% endif %}
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="row">	
+			    <div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_date">Operator</label>
+						{% if event != 'n/a' %}
+							<input id = "i_operator"  name = "_operator" input class="form-control" value = {{event.operator}}  required >
+						{% else %}
+							<input id = "i_operator"  name = "_operator" input class="form-control" placeholder='Add operator'  required >
+						{% endif %}
+					</div>	
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_date">inventory ID</label>
+						{% if event != 'n/a' %}
+							<input id = "i_id"  name = "i_id" input class="form-control" value={{active_inv.id}}>
+						{% else %}
+							<input id = "i_id"  name = "i_id" input class="form-control" placeholder={{active_inv.id}}>
+						{% endif %}
+					</div>	
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_date" id ='el_id'>Event ID</label>
+						{% if event != 'n/a' %}
+							<input id = "e_id" name = "e_id" input class="form-control" value = {{event.id}}>
+						{% else %}
+							<input id = "e_id" name = "e_id" input class="form-control" placeholder='Added automatically'>
+						{% endif %}
+					</div>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3 col-lg-4 grid-col">
+					<div class="form-group">
+						<label>Event Description: </label><br>
+						{% if event != 'n/a' %}
+							<textarea id="_comments" name = "_comments" value = {{event.comment}} rows="3" cols="68" style="align-content:left"/>
+						{% else %}
+							<textarea id="_comments" name = "_comments" rows="3" cols="68" style="align-content:left"/>
+						{% endif %}
+						
+						</textarea>
+					</div>
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<input type="submit" id = "_save" name = "_save" data-save="save"  value="Add new event">
+					</div>
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<input type="submit" id = "_update" name = "_update" data-update="save"  value="Update event">
+					</div>
+				</div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<input type="submit" id = "_delete" name = "_delete" data-update="save"  value="Delete event">
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="my-2">
+		</form>
+	</main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="{% static 'inventory/js/jquery.slim.min.js' %}"><\/script>')</script><script src="{% static 'inventory/js/bootstrap.bundle.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>                           
+</body>
+{% endblock %}
+
+</html>
+

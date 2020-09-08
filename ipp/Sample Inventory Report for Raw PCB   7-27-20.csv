@@ -1,0 +1,63 @@
+Inventory Summary,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+Part,Quantity,Bins:,Quantity,Quantity,Quantity,Quantity,On-Hand,,,,,,,,
+Number,Unit,,Description,Vendor,Customer,GL Code,Prod. Code,in Proc.,on Order,Reserved,Outside,On Hand,Cost,Cost,
+MISC-0186,EA,,"PCB Material,12x18x.0100 Panel, Taconic TLX-9-0100-C0/C0
+**Vendor C of C specifying the measured dielectric thickness range is required**",NEW,,1156,INVENTORY,,,,,18,60.000,"$1,080.00",
+MISC-0217,SQI,"QUESTECH (16), QUESTECH (2), YARD (0)","PCB Material,12x18x.0050 Panel, Arlon TC350-0050-C0/C0
+**Vendor C of C specifying the measured dielectric thickness range is required**",SPC,,1156,INVENTORY,,,51,,405,0.428,$173.46,
+MISC-0218,SQI,YARD (405),"PCB Material,12x18x.0100 Panel, Arlon TC350-0100-C0/C0
+**Vendor C of C specifying the measured dielectric thickness range is required**",SPC,,1156,INVENTORY,,,14,,382,0.310,$118.42,
+MISC-0240,EA,STK (382),"PCB Material,12x18x.0020 Panel, Taconic RF-35P-0020-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,8,21.380,$171.04,
+MISC-0241,EA,YARD (8),"PCB Material,12x18x.0040 Panel, Taconic RF-35P-0040-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,3,22.750,$68.25,
+MISC-0242,EA,YARD (3),"PCB Material,12x18x.0060 Panel, Taconic RF-35P-0060-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,7,24.750,$173.25,
+MISC-0243,EA,YARD (7),"PCB Material,12x18x.0100 Panel, RO6035HTC12X18H1/H10100/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,2,0.000,,$0.00,,
+MISC-0245,EA,OBS (2),"PCB Material,12x18x.0450 Panel, RO6035HTC12X18H1/H10450/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,8,220.340,,"$1,762.72",,
+MISC-0246,EA,"YARD (4), YARD (4)","PCB Material,12x18x.0100 Panel, Reverse Treat, RO6035HTC12X18S1/S10100/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,8,127.340,,"$1,018.72",,
+MISC-0247,EA,"YARD (3), YARD (5)","PCB Material,12x18x.0200 Panel, Reverse Treat, RO6035HTC12X18S1/S10200/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,2,349.650,,$699.30,,
+MISC-0248,EA,YARD (2),"PCB Material,12x18x.0250 Panel, Reverse Treat, RO6035HTC12X18S1/S10250/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,9,170.890,,"$1,538.01",,
+MISC-0249,EA,YARD (9),"PCB Material,12x18x.0300 Panel, Reverse Treat, RO6035HTC12X18S1/S10300/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,12,170.090,,"$2,041.08",,
+MISC-0250,EA,"YARD (2), YARD (10)","PCB Material,12x18x.0400 Panel, Reverse Treat, RO6035HTC12X18S1/S10400/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,7,203.210,,"$1,422.47",,
+MISC-0252,EA,"SPC (1), SPC (1), SPC (5), YARD (0)","PCB Material,12x18x.0600 Panel, ED, RO6035HTC12X18S1/S10600/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,4,260.330,,"$1,041.32",,
+MISC-0253,EA,"YARD (2), YARD (2)","PCB Material,12x18x.0900 Panel, Reverse Treat, RO6035HTC12X18S1/S10900/DI
+**Vendor C of C specifying the measured dielectric thickness range is required**",ROGERS,,1156,,,,11,306.940,,"$3,376.34",,
+MISC-0254,EA,YARD (11),"PCB Material,12x18x.0600 Panel, Arlon TC350-0600-C1/C1
+**Vendor C of C specifying the measured dielectric thickness range is required**",ARLON,,1156,INVENTORY,,,,,8,68.560,$548.48,
+MISC-0255,EA,YARD (8),"PCB Material,12x18x.0035 Panel, Taconic TLE-95-0035-A-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,6,29.430,$176.58,
+MISC-0256,EA,YARD (6),"PCB Material,12x18x.0250 Panel, Taconic TSM-DS3-0250-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,9,0.000,$0.00,
+MISC-0257,EA,OBS (9),"PCB Material,12x18x.0600 Panel, Taconic TSM-DS3-0600-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,2,42.920,$85.84,
+MISC-0268,EA,YARD (2),"PCB Material,12x18x.0100 Panel, Arlon TC350-0100-C1/C1
+**Vendor C of C specifying the measured dielectric thickness range is required**",NEW,,1156,INVENTORY,,,,,4,0.000,$0.00,
+MISC-0293,EA,OBS (4),"PCB Material,12x18x.005 Panel, Taconic TSM-DS3-0050-C1/C1-12X18
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,8,22.180,$177.44,
+MISC-0294,EA,SPC (8),"PCB Material,12x18x.015 Panel, Arlon CLTE-XT-0150-C1/C1
+**Vendor C of C specifying the measured dielectric thickness range is required**",SPC,,1156,INVENTORY,,,,,12,75.960,$911.52,
+MISC-0295,EA,SPC (12),"PCB Material,12x18x.070 Panel, Arlon CLTE-XT-0700-C1/C1
+**Vendor C of C specifying the measured dielectric thickness range is required**",SPC,,1156,INVENTORY,,,,,3,169.270,$507.81,
+MISC-0323,SQI,SPC (3),"PCB Material,12x18x.0600 Panel, Taconic RF-35HTC-0600-C1/C1
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,5,273.750,"$1,368.75",
+MISC-0324,SQI,WHS (5),"PCB Material,12x18x.0300 Panel, Taconic RF-35HTC-0300-C1/C1
+**Vendor C of C specifying the measured dielectric thickness range is required**",TACONIC,,1156,INVENTORY,,,,,3,68.010,$204.03,
+MISC-0333,SQI,YARD (3),"Pre-Preg Material,12x18x.0024 Sheet DK=2.98, Rogers CLTE-P",ROGERS,,1156,INVENTORY,,,,,300,21.180,"$6,354.00",
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,

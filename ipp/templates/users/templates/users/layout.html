@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="TCLI login ">1
+		<link rel="icon" type="image/x-icon" href="{% static 'users/images/rings_16x16.ico' %}">
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{% static 'users/css/bootstrap.css' %}">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+		<link rel="stylesheet" href="{% static 'users/css/ionicons.min.css' %}">
+		<link rel="stylesheet" href="{% static 'users/css/Footer-Basic.css' %}">
+		<link rel="stylesheet" href="{% static 'users/css/styles.css' %}">
+
+		<style>
+		  .bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		  }
+		  @media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			  font-size: 3.5rem;
+			}
+		  }
+		</style>	
+		<link rel="stylesheet" href="{% static 'users/css/signin.css' %}">
+	</head>
+    <body>
+        <h1>{% block heading %}{% endblock %}</h1>
+        {% block body %}
+        {% endblock %}
+		{% block footer %}
+		{% endblock %}
+    </body>
+</html>
