@@ -125,9 +125,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-#import dj_database_url 
-#prod_db  =  dj_database_url.config(conn_max_age=500)
-#DATABASES['default'].update(prod_db)
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
 #django_heroku.settings(locals())
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
