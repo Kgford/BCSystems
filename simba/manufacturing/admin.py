@@ -1,0 +1,23 @@
+from django.contrib import admin
+from .models import Manuf_BOM, Manuf_ChargeCodes, Manuf_ClassCodes, Manuf_ColorCodes, Manuf_SizeCodes, Manuf_TypeCodes, Manuf_CompanyInfo, Manuf_Customers, Manuf_Expenses, Manuf_Images, Manuf_Inventory, Manuf_Invoice, Manuf_InvoiceID, Manuf_Materials, Manuf_Orders, Manuf_PO, Manuf_POID, Manuf_Quote, Manuf_QuoteID, Manuf_SalesTransation, Manuf_Vendors, Manuf_ZipCode
+
+admin.site.register(Manuf_BOM)
+admin.site.register(Manuf_ChargeCodes)
+admin.site.register(Manuf_ClassCodes)
+admin.site.register(Manuf_ColorCodes)
+admin.site.register(Manuf_TypeCodes)
+admin.site.register(Manuf_CompanyInfo)
+admin.site.register(Manuf_Customers)
+admin.site.register(Manuf_Expenses)
+admin.site.register(Manuf_Images)
+admin.site.register(Manuf_Inventory)
+admin.site.register(Manuf_Invoice)
+admin.site.register(Manuf_InvoiceID)
+admin.site.register(Manuf_Orders)
+admin.site.register(Manuf_PO)
+admin.site.register(Manuf_POID)
+admin.site.register(Manuf_Quote)
+admin.site.register(Manuf_QuoteID)
+admin.site.register(Manuf_SalesTransation)
+admin.site.register(Manuf_Vendors)
+admin.site.register(Manuf_ZipCode)
