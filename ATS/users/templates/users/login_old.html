@@ -1,0 +1,30 @@
+{% extends "users/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+<body class="text-center">
+	<form action="{% url 'users:user_login' %} class="form-signin"  method="post")>
+		{% if message %}
+			<diV class="mt-2 mb-3 text-muted">{{ message }}</div>
+		{% endif %}
+		{% csrf_token %}
+		<img src="{% static 'users/images/logo.jpg' %}" class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+		<h1 class="h3 mb-3 font-weight-normal">Please login</h1>
+		<label for="username" class="sr-only">User Name</label>
+		<input type="text" class="form-control" name="username" placeholder={{UserN}}  required autofocus>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" input class="form-control" name="password" placeholder={{PassW}} required autofocus>
+		<div class="checkbox mb-3">
+			<label>
+			  <input type="checkbox" value="remember-me"> Remember me
+			</label>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Login</button>
+		<p class="mt-2 mb-3 text-muted">&copy; Harris FTI-SAT Inventory Control 2020</p>
+	</form>
+</body>
+{% endblock %}

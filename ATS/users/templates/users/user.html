@@ -1,0 +1,19 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+<body class="text-center">
+	<img src="{% static 'users/images/logo.png' %}" class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+	<h1>Welcome, {{request.user.first_name }}</h1>
+	<ul>
+		<li>Username: {{request.user.username }}</li>
+		<li>Email: {{ request.user.email }}</li>
+	</ul>
+	<p class="mt-2 mb-3 text-muted">&copy; Harris FTI-SAT Inventory Control 2020</p>
+	
+</body>
+{% endblock %}
