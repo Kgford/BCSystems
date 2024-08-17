@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/x-icon" href="{% static 'test_executive/images/ats_16X16.ico' %}">
+		<title>Test Executive</title>	
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Test Executive">
+		<!-- Bootstrap core CSS -->
+		<link rel="stylesheet" href="{% static 'test_executive/css/bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'test_executive/css/cover.css' %}">
+		<link rel="stylesheet" href="{% static 'test_executive/css/led.css' %}">
+		<link rel="stylesheet" href="{% static 'test_executive/css/starter-template.css' %}">
+		<link rel="stylesheet" href="{% static 'test_executive/css/styles.css' %}">
+			
+				
+		<!-- Book Search -->
+		<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/cover/">
+		<style>
+		  .bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		  }
+
+		  @media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			  font-size: 3.5rem;
+			}
+		  }
+		</style>
+		<style>
+			.vertical {
+				border-left: 5px solid white;
+				height: 200px;
+			}
+		</style>
+		<!-- Custom styles for this template -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
+				
+		
+		<script type="text/javascript">
+			function UpdateOffset1() {
+				let pc = document.getElementById('_pc').value;
+				let active_user = document.getElementById('_active_user').value;
+				let part_number = document.getElementById('_part_number').value;	
+				let offset1 = document.getElementById('_offset1').value;
+				let workstation = document.getElementById('_workstation').value;
+				var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+				 $.ajax({
+						 type: 'POST',
+						 url: "{% url 'test_exec:update_offset' %}",
+						 dataType: 'json',
+						 data: {'workstation':workstation,'pc':pc,'active_user':active_user,'part_number':part_number,'offset':1,'offset_val':offset1,'csrfmiddlewaretoken': csrftoken},
+						 success: function(data) {
+						 }
+					})
+			};
+
+		</script>
+		
+	</head>
+	<body>
+	   {% block body %}
+	   {% endblock %}
+	</body>
+</html>

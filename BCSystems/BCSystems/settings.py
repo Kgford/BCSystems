@@ -11,18 +11,30 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(PROJECT_ROOT)
+DATA_DIR = os.environ.get('DATA_DIR') # Going to move all database, static and media files to this directory
+DATA_DIR = 'C:\\BC_Data\\'
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+BACKUPS = DATA_DIR
+TEMPLATE_DIR = os.path.join(SETTINGS_PATH,'templates')
+STATIC_DIR = os.path.join(DATA_DIR,'static') # move to DATA_DIR soon
+MEDIA_DIR = os.path.join(DATA_DIR,'media') # move to DATA_DIR soon
+MEDIA_ROOT  = os.path.join(DATA_DIR, 'media') # move to DATA_DIR soon
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(DATA_DIR, 'staticfiles') # move to DATA_DIR soon
+STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [STATIC_DIR]
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d%bn2614fj^eq*g2w1&6!nieq549*owlhcf&nw9#y)60+4%u(m'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index' 
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -42,7 +54,8 @@ INSTALLED_APPS = [
     'equipment',
     'specifications',
     'manual_control',
-    'sub_functions',
+    'functions',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +73,9 @@ ROOT_URLCONF = 'BCSystems.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+        os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -82,7 +98,7 @@ WSGI_APPLICATION = 'BCSystems.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
     }
 }
 
@@ -129,3 +145,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SESSION_EXPIRE_SECONDS = 7200  # 2 hour
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60
+SESSION_TIMEOUT_REDIRECT = 'index'

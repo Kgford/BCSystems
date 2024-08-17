@@ -1,0 +1,1 @@
+{% extends "users/base.html" %}{% block body_block %}<div class="container">  <div class="jumbotron">        {% if user.is_authenticated %}		<h1>Someone tried to login and failed.</h1>        <h2>Hello {{ user.username }}</h2>    {% else %}		<h1>Login Failed</h1>        <h2>Please Try Again</h2>    {% endif %}  </div></div>{% endblock %}

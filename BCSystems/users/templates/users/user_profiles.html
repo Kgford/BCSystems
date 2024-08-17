@@ -1,0 +1,713 @@
+{% extends "tickets/Inquiry_layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+<body">
+	<nav class="navbar navbar-expand-lg navbar-dark "style="background-color: #304e74;">
+            <div class="container-fluid">
+			<a class="navbar-brand" href = "https://innovativepp.com/">Innovative Power Products&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="home"></span>
+							<a class="nav-link" href="{% url 'index' %}">Home  </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						{% if active_administrator %}
+						<li class="nav-item active">
+							<span data-feather="home"></span>
+							<a class="nav-link" href="{% url 'admin:index' %}" >Database</a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						{% endif %}
+						{% if user.is_authenticated %}
+							<li class="nav-item active">
+								<span data-feather="home"></span>
+								<a class="nav-link" href="{% url 'tickets:logout' %}">Logout</a>
+							</li>
+						{% else %}
+							<li class="nav-item active">
+								<span data-feather="home"></span>
+								<a class="nav-link" href="#">Login</a>
+							</li>
+						{% endif %}
+                    </ul>
+                </div>
+				<div class="btn-toolbar mb-2 mb-md-0">
+					<a style = "color:#CCD1D1" >Operator: {{active_user_name}}</a>
+				</div>
+			</div>
+        </nav>
+	
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+		<center class="container">
+			<div class="container mt-5 mb-5 d-flex justify-content-left">
+				<img  src="{% static 'users/images/profile-banner.png' %}"  class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+			</div>
+		</center>
+		<hr>
+		<center>	
+			<form action = "{% url 'users:profiles' %}" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form}}
+				
+				<div class="row">
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_user_name"  class="form-label">Employee Name</label>
+							<div class="form-group">
+								<!-- active_users-->
+								<select id='_user_name' name ='_user_name' class="browser-default custom-select custom-select-lg mb-3"  onchange="this.form.submit()" >
+									{% if user_name != -1 %}
+										<option selected>{{user_name}}</option>
+									{% else %}
+										<option data-desc = 'user_name' >Pick from list</option>
+									{% endif %}	
+									{% for users in user_names %}
+										{% if users != this_user %}
+											<option data-desc = 'user_name', value = "{{users}}">{{users}}</option>
+										{% endif %}	
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_active_group" data-toggle="tooltip" data-placement="top" title="group" >Group</label>
+							<select id='_active_group' name ='_active_group' class="browser-default custom-select custom-select-lg mb-1" >
+								{% if user_list.active_group %}
+									<option selected>{{user_list.active_group}}</option>
+								{% else %}
+									<option data-desc = 'active_group' >Pick from list</option>
+								{% endif %}	
+								<option data-desc = 'active_group', value = "Sales">Sales</option>
+								<option data-desc = 'active_group', value = "Engineering">Engineering</option>
+								<option data-desc = 'active_group', value = "Design">Design</option>
+								<option data-desc = 'active_group', value = "Test">Test</option>
+								<option data-desc = 'active_group', value = "Manufacturing">Manufacturing</option>
+								<option data-desc = 'active_group', value = "Inspection">Inspection</option>
+								<option data-desc = 'active_group', value = "Stock">Stock</option>
+								<option data-desc = 'active_group', value = "Shipping">Shipping</option>
+								<option data-desc = 'active_group', value = "HR">Human Resourdes</option>
+							</select>
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_dept" data-toggle="tooltip" data-placement="top" title="dept" >Department</label>
+							<select id='_department_code' name ='_department_code' class="browser-default custom-select custom-select-lg mb-1" >
+								{% if user_list %}
+									<option selected>{{user_list.department_code}}</option>
+								{% else %}
+									<option data-desc = 'dept' >Pick from list</option>
+								{% endif %}	
+								<option data-desc = 'active_group', value = "100">100</option>
+								<option data-desc = 'active_group', value = "200">200</option>
+								<option data-desc = 'active_group', value = "300">300</option>
+								<option data-desc = 'active_group', value = "400">400</option>
+								<option data-desc = 'active_group', value = "500">500</option>
+								<option data-desc = 'active_group', value = "600">600</option>
+								<option data-desc = 'active_group', value = "700">700</option>
+								<option data-desc = 'active_group', value = "800">800</option>
+								<option data-desc = 'active_group', value = "900">900</option>
+								<option data-desc = 'active_group', value = "1000">1000</option>
+								<option data-desc = 'active_group', value = "1100">1100</option>
+								<option data-desc = 'active_group', value = "1200">1200</option>
+								<option data-desc = 'active_group', value = "1300">1300</option>
+							</select>
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							{% if user_list.active %}
+								<label for="_active">Active?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox" data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_active" name="_active"  checked  />
+							{% else %}
+								<label for="_activex">Active?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox"data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_active" name="_active"  />
+							{% endif %}
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_status" data-toggle="tooltip" data-placement="top" title="Status" >Status</label>
+							<select id='_active_group' name ='_status' class="browser-default custom-select custom-select-lg mb-1" >
+								{% if user_list %}
+									<option selected>{{user_list.status}}</option>
+								{% else %}
+									<option data-desc = 'status' >Pick from list</option>
+								{% endif %}	
+								<option data-desc = 'status', value = "Regular">Regular</option>
+								<option data-desc = 'status', value = "Exempt">Exempt</option>
+								<option data-desc = 'status', value = "Part Time">Part Time</option>
+								<option data-desc = 'status', value = "Temp">Temp</option>
+								<option data-desc = 'status', value = "Contractor">Contractor</option>
+								<option data-desc = 'status', value = "Job Shopper">Job Shopper</option>
+								<option data-desc = 'status', value = "Terminated">Terminated</option>
+								</select>
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Hours</label>
+							{% if user_list.hours %}
+								<input  id = "_hours"  name = "_hours" input class="form-control" value = "{{user_list.hours}}" >
+							{% else %}
+								<input  id = "_hours"  name = "_hours" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_role" data-toggle="tooltip" data-placement="top" title="Position" >Position</label>
+							<select id='_role' name ='_role' class="browser-default custom-select custom-select-lg mb-1" >
+								{% if user_list %}
+									<option selected>{{user_list.role}}</option>
+								{% else %}
+									<option data-desc = 'role' >Pick from list</option>
+								{% endif %}	
+								<option data-desc = 'role', value = "President">President</option>
+								<option data-desc = 'role', value = "Vice President">Vice President</option>
+								<option data-desc = 'role', value = "Manager">Manager</option>
+								<option data-desc = 'role', value = "Supervisor">Supervisor</option>
+								<option data-desc = 'role', value = "Engineer">Engineer</option>
+								<option data-desc = 'role', value = "Mechaical_Engineer">Mechaical_Engineer</option>
+								<option data-desc = 'role', value = "Designer">Designer</option>
+								<option data-desc = 'role', value = "Technician">Technician</option>
+								<option data-desc = 'role', value = "Inspector">Inspector</option>
+								<option data-desc = 'role', value = "Mechanical_Assembler">Mechanical_Assembler</option>
+								<option data-desc = 'role', value = "Electrical_Assembler">Electrical_Assembler</option>
+								<option data-desc = 'role', value = "Test_Engineer">Test_Engineer</option>
+								<option data-desc = 'role', value = "Software_Engineer">Software_Engineer</option>
+								<option data-desc = 'role', value = "Draftsman">Draftsman</option>
+								<option data-desc = 'role', value = "Tester">Tester</option>
+								<option data-desc = 'role', value = "Administrative Assistant">Administrative Assistant</option>
+								<option data-desc = 'role', value = "Costing">Costing</option>
+								<option data-desc = 'role', value = "Sales">Sales</option>
+								<option data-desc = 'role', value = "Prep_Operator">Prep_Operator</option>
+								<option data-desc = 'role', value = "Owner">Owner</option>
+								<option data-desc = 'role', value = "Operator">Operator</option>
+								<option data-desc = 'role', value = "Managed_Services_Provider">Managed_Services_Provider</option>
+							</select>
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Employee #</label>
+							{% if user_list.employee_number %}
+								<input  id = "_employee_number"  name = "_employee_number" input class="form-control" value = "{{user_list.employee_number}}" >
+							{% else %}
+								<input  id = "_employee_number"  name = "_employee_number" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_reports_to" data-toggle="tooltip" data-placement="top" title="Reports To" >Reports To</label>
+							<select id='_reports_to' name ='_reports_to' class="browser-default custom-select custom-select-lg mb-1" >
+								{% if user_list.reports_to %}
+									<option selected>{{user_list.reports_to}}</option>
+								{% else %}
+									<option data-desc = 'reports_to' >Pick from list</option>
+								{% endif %}	
+								{% for this_mananger in manager_list %}
+									<option data-desc = 'reports_to', value = "{{this_mananger}}">{{this_mananger}}</option>
+								{% endfor %}
+							</select>
+						</div>	
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Shift</label>
+							{% if user_list.shift %}
+								<input  id = "_shift"  name = "_shift" input class="form-control" value = "{{user_list.shift}}" >
+							{% else %}
+								<input  id = "_shift"  name = "_shift" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Shift Start</label>
+							{% if user_list.shift_start %}
+								<input  id = "_shift_start"  name = "_shift_start" input class="form-control" value = "{{user_list.shift_start|time:'h:i A'}}" >
+							{% else %}
+								<input  id = "_shift_start"  name = "_shift_start" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Shift End</label>
+							{% if user_list.shift_end %}
+								<input  id = "_shift_end"  name = "_shift_end" input class="form-control" value = "{{user_list.shift_end|time:'h:i A'}}" >
+							{% else %}
+								<input  id = "_shift_end"  name = "_shift_end" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					{% if not user_list.status == 'Exempt' %}
+						{% if user_position == 'Operator' or active_executive  %}
+							<div class="col-sm-1 col-lg-2 grid-col">
+								<div class="form-group">
+									<label for="_desc">Hourly Rate</label>
+									{% if user_list.hourly %}
+										<input id = "hourly"  name = "_hourly" input class="form-control" value = '{{user_list.hourly|stringformat:"1.2f"|cut:"-"}}'>
+									{% else %}
+										<input id = "_hourly"  name = "_hourly" input class="form-control" >
+									{% endif %}
+								</div>	
+							</div>
+						{% else %}
+							<div class="col-sm-1 col-lg-2 grid-col">
+								<div class="form-group">
+									<label for="_desc">Hourly Rate</label>
+									<input input class="form-control" disabled  value = '{{no_lookie}}'>
+								</div>	
+							</div>
+						{% endif %}
+					{% endif %}	
+					{% if user_list.status == 'Exempt' %}
+						{% if user_position == 'Operator' or active_executive %}
+							<div class="col-sm-1 col-lg-2 grid-col">
+								<div class="form-group">
+									<label for="_desc">Salaried Rate</label>
+									{% if user_list.salaried %}
+										<input type="number"  id = "_salaried"  name = "_salaried" input class="form-control" value = '{{user_list.salaried|stringformat:"1.2f"|cut:"-"}}'>
+									{% else %}
+										<input type="number"  id = "_salaried"  name = "_salaried" input class="form-control" >
+									{% endif %}
+								</div>
+							</div>
+						{% else %}
+							<div class="col-sm-1 col-lg-2 grid-col">
+								<div class="form-group">
+									<label for="_desc">Salaried Rate</label>
+									<input input class="form-control" disabled value = '{{no_lookie}}'>
+								</div>	
+							</div>
+						{% endif %}
+					{% endif %}	
+					
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Street Address</label>
+							{% if user_list.address %}
+								<input  id = "_address"  name = "_address" input class="form-control" value = "{{user_list.address}}" >
+							{% else %}
+								<input  id = "_address"  name = "_address" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Appt/Suite</label>
+							{% if user_list.address_line2 %}
+								<input  id = "_address_line2"  name = "_address_line2" input class="form-control" value = "{{user_list.address_line2}}">
+							{% else %}
+								<input  id = "_address_line2"  name = "_address_line2" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">City</label>
+							{% if user_list.city %}
+								<input  id = "_city"  name = "_city" input class="form-control" value = "{{user_list.city}}" >
+							{% else %}
+								<input  id = "_city"  name = "_city" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">State</label>
+							{% if user_list.state %}
+								<input  id = "_state"  name = "_state" input class="form-control" value = "{{user_list.state}}" >
+							{% else %}
+								<input  id = "_state"  name = "_state" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Zip Code</label>
+							{% if user_list.zip %}
+								<input  id = "_zip"  name = "_zip" input class="form-control" value = "{{user_list.zip}}">
+							{% else %}
+								<input  id = "_zip"  name = "_zip" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Home Phone</label>
+							{% if user_list.phone %}
+								<input type = 'tel' id = "_phone"  name = "_phone" input class="form-control" value = "{{user_list.phone}}">
+							{% else %}
+								<input  type = 'tel' id = "_phone"  name = "_phone" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Cell Phone</label>
+							{% if user_list.personal_phone %}
+								<input type = 'tel' id = "_personal_phone"  name = "_personal_phone" input class="form-control" value = "{{user_list.personal_phone}}">
+							{% else %}
+								<input  type = 'tel' id = "_personal_phone"  name = "_personal_phone" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Work Email</label>
+							{% if user_list.email %}
+								<input type="email" id = "_email"  name = "_email" input class="form-control" value = "{{user_list.email}}">
+							{% else %}
+								<input type="email" id = "_email"  name = "_email" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Personal email</label>
+							{% if user_list.personal_email %}
+								<input type="email" id = "_personal_email"  name = "_personal_email" input class="form-control" value = "{{user_list.personal_email}}">
+							{% else %}
+								<input type="email" id = "_personal_email"  name = "_personal_email" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+				</div>	
+				
+				<div class="row">
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Birth Date</label>
+							{% if birthdate != -1 %}
+								<input type = 'date' id = "_birthdate"  name = "_birthdate" input class="form-control" value = "{{birthdate}}">
+							{% else %}
+								<input  type = 'date' id = "_birthdate"  name = "_birthdate" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Hire Date</label>
+							{% if hire_date != -1 %}
+								<input type = 'date' id = "_hire_date"  name = "_hire_date" input class="form-control" value = "{{hire_date}}">
+							{% else %}
+								<input  type = 'date' id = "_hire_date"  name = "_hire_date" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Termination Date</label>
+							{% if termination_date != -1 %}
+								<input type = 'date' id = "_termination_date"  name = "_termination_date" input class="form-control" value = "{{termination_date}}">
+							{% else %}
+								<input  type = 'date' id = "_termination_date"  name = "_termination_date" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							{% if user_list.paychex %}
+								<label for="_box">PAYCHEX?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox" data-toggle="tooltip" data-placement="top" title="Included in PAYCHEK System" class="form-check-input" id="_paychex" name="_paychex"  checked  />
+							{% else %}
+								<label for="_box">PAYCHEX?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox"data-toggle="tooltip" data-placement="top" title="Included in PAYCHEK System" class="form-check-input" id="_paychex" name="_paychex"  />
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							{% if user_list.ticket_list %}
+								<label for="_box">Action Tickets?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox" data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_ticket_list" name="_ticket_list"  checked  />
+							{% else %}
+								<label for="_box">Action Tickets?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox"data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_ticket_list" name="_ticket_list"  />
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							{% if user_list.gemba_team %}
+								<label for="_box">Gemba/Kaizen Team?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox" data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_gemba_team" name="_gemba_team"  checked  />
+							{% else %}
+								<label for="_box">Gemba/Kaizen Team?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox"data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_gemba_team" name="_gemba_team"  />
+							{% endif %}
+						</div>
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Last Review Date</label>
+							{% if last_review_date != -1 %}
+								<input type = 'date' id = "_review_date"  name = "_review_date" input class="form-control" value = "{{last_review_date}}">
+							{% else %}
+								<input  type = 'date' id = "_review_date"  name = "_review_date" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Last Wage Change Date</label>
+							{% if wage_change_date != -1  %}
+								<input type = 'date' id = "_wage_change_date"  name = "_wage_change_date" input class="form-control" value = "{{wage_change_date}}">
+							{% else %}
+								<input  type = 'date' id = "_wage_change_date"  name = "_wage_change_date" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Last Training Date</label>
+							{% if last_training_date != -1 %}
+								<input type = 'date' id = "_last_training_date"  name = "_last_training_date" input class="form-control" value = "{{last_training_date}}">
+							{% else %}
+								<input  type = 'date' id = "_last_training_date"  name = "_last_training_date" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_lean_status" data-toggle="tooltip" data-placement="top" title="Status" >Lean Status</label>
+							<select id='_lean_status' name ='_lean_status' class="browser-default custom-select custom-select-lg mb-1" >
+								{% if user_list != -1 %}
+									<option selected>{{user_list.lean_status}}</option>
+								{% endif %}
+								<option data-desc = '_lean_status', value = "None">None</option>
+								<option data-desc = '_lean_status', value = "White">White</option>
+								<option data-desc = '_lean_status', value = "Yellow">Yellow</option>
+								<option data-desc = '_lean_status', value = "Green">Green</option>
+								<option data-desc = '_lean_status', value = "Black">Black</option>
+							</select>
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							{% if user_list.ci_list %}
+								<label for="_box">Continuous Improvements?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox" data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_ci_list" name="_ci_list"  checked  />
+							{% else %}
+								<label for="_box">Continuous Improvements?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<input type="checkbox"data-toggle="tooltip" data-placement="top" title="Included in DMS Ticket System" class="form-check-input" id="_ci_list" name="_ci_list"  />
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<center><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emergency Contact Information</h3></center>
+				</div>	
+				<div class="row">
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Contact Name</label>
+							{% if user_list.address %}
+								<input  id = "_contact_name"  name = "_contact_name" input class="form-control" value = "{{user_list.contact_name}}" >
+							{% else %}
+								<input  id = "_contact_name"  name = "_contact_name" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Contact Relationship</label>
+							{% if user_list.address %}
+								<input  id = "_contact_relationship"  name = "_contact_relationship" input class="form-control" value = "{{user_list.contact_relationship}}" >
+							{% else %}
+								<input  id = "_contact_relationship"  name = "_contact_relationship" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Street Address</label>
+							{% if user_list.address %}
+								<input  id = "_contact_address"  name = "_contact_address" input class="form-control" value = "{{user_list.contact_address}}" >
+							{% else %}
+								<input  id = "_contact_address"  name = "_contact_address" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Appt/Suite</label>
+							{% if user_list.address_line2 %}
+								<input  id = "_contact_address_line2"  name = "_contact_address_line2" input class="form-control" value = "{{user_list.contact_address_line2}}">
+							{% else %}
+								<input  id = "_contact_address_line2"  name = "_contact_address_line2" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">City</label>
+							{% if user_list.city %}
+								<input  id = "_contact_city"  name = "_contact_city" input class="form-control" value = "{{user_list.contact_city}}" >
+							{% else %}
+								<input  id = "_contact_city"  name = "_contact_city" input class="form-control" >
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">State</label>
+							{% if user_list.state %}
+								<input  id = "_contact_state"  name = "_contact_state" input class="form-control" value = "{{user_list.contact_state}}" >
+							{% else %}
+								<input  id = "_contact_state"  name = "_contact_state" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<label for="_desc">Zip Code</label>
+							{% if user_list.zip %}
+								<input  id = "_contact_zip"  name = "_contact_zip" input class="form-control" value = "{{user_list.contact_zip}}">
+							{% else %}
+								<input  id = "_contact_zip"  name = "_contact_zip" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Home Phone</label>
+							{% if user_list.contact_phone%}
+								<input type = 'tel' id = "_contact_phone"  name = "_contact_phone" input class="form-control" value = "{{user_list.contact_phone}}">
+							{% else %}
+								<input  type = 'tel' id = "_contact_phone"  name = "_contact_phone" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Cell Phone</label>
+							{% if user_list.contact_cell_phone %}
+								<input type = 'tel' id = "_contact_cell_phone"  name = "_contact_cell_phone" input class="form-control" value = "{{user_list.contact_cell_phone}}">
+							{% else %}
+								<input  type = 'tel' id = "_contact_cell_phone"  name = "_contact_cell_phone" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Work Email</label>
+							{% if user_list.email %}
+								<input type="email" id = "_contact_email"  name = "_contact_email" input class="form-control" value = "{{user_list.contact_email}}">
+							{% else %}
+								<input type="email" id = "_contact_email"  name = "_contact_email" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+					<div class="col-sm-1 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_desc">Personal email</label>
+							{% if user_list.personal_email %}
+								<input type="email" id = "_contact_personal_email"  name = "_contact_personal_email" input class="form-control" value = "{{user_list.contact_personal_email}}">
+							{% else %}
+								<input type="email" id = "_contact_personal_email"  name = "_contact_personal_email" input class="form-control">
+							{% endif %}
+						</div>	
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-2 col-lg-2 grid-col">
+						<div class="form-group">
+							<label for="_picture" data-toggle="tooltip" data-placement="top" title="Upload file for email attachment:">Upload user photo</label>
+							<input type="file" name="upload" accept=".jpeg ,.jpg, .png, .bmp"  title="Upload User pic" />
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-1 col-lg-1 grid-col">
+						<div class="form-group">
+							<button type="submit" id = "_save" name = "_save"  class="btn btn-primary">Save</button>
+						</div>
+					</div>	
+				</div>
+				{% if user_list.profile_pic %}
+					<div class="row">
+						<div class="col-sm-2 col-lg-3 grid-col">
+							<div class="thumbnail">
+								<img src="{{ user_list.profile_pic.url}}"  class="img-responsive">
+								<p>Located at: <a href={{attached.attachment.url}}>{{user_list.profile_pic}}</a></p>
+							</div>	
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			
+		</div>		
+	</form>
+<center>		
+		
+	</main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script> 
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'p3plcpnl0769'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
+
+</body>
+{% endblock %}
+
+</html>

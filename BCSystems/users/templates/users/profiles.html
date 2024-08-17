@@ -1,0 +1,188 @@
+{% extends "tickets/Inquiry_layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+<body">
+	<nav class="navbar navbar-expand-lg navbar-dark "style="background-color: #304e74;">
+            <div class="container-fluid">
+			<a class="navbar-brand" href = "https://innovativepp.com/">Innovative Power Products&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="home"></span>
+							<a class="nav-link" href="{% url 'index' %}">Home  </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						{% if active_administrator %}
+						<li class="nav-item active">
+							<span data-feather="home"></span>
+							<a class="nav-link" href="{% url 'admin:index' %}" >Database</a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						<li class="nav-item active">
+							<span data-feather="dummyspace"></span>
+							<a class="nav-link" href="#" aria-disabled="true">      </a>
+						</li>
+						{% endif %}
+						{% if user.is_authenticated %}
+							<li class="nav-item active">
+								<span data-feather="home"></span>
+								<a class="nav-link" href="{% url 'tickets:logout' %}">Logout</a>
+							</li>
+						{% else %}
+							<li class="nav-item active">
+								<span data-feather="home"></span>
+								<a class="nav-link" href="#">Login</a>
+							</li>
+						{% endif %}
+                    </ul>
+                </div>
+				<div class="btn-toolbar mb-2 mb-md-0">
+					<a style = "color:#CCD1D1" >Operator: {{active_user_name}}</a>
+				</div>
+			</div>
+        </nav>
+	
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+		<center class="container">
+			<div class="container mt-5 mb-5 d-flex justify-content-left">
+				<img  src="{% static 'users/images/profile-banner.png' %}"  class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+			</div>
+		</center>
+		<center>
+			<div class="row">
+				<div class="col-sm-3 col-lg-3 grid-col"></div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_user_name"  class="form-label">Employee Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_name}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_active_group" data-toggle="tooltip" data-placement="top" title="group" >Group&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.active_group}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_dept" data-toggle="tooltip" data-placement="top" title="dept" >Department&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.department_code}}</a>	
+						
+					</div>	
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-3 col-lg-3 grid-col"></div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_user_name"  class="form-label">Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.status}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_active_group" data-toggle="tooltip" data-placement="top" title="group" >Hours&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.hours}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_dept" data-toggle="tooltip" data-placement="top" title="dept" >Position&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.role}}</a>	
+						
+					</div>	
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-3 col-lg-3 grid-col"></div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_user_name"  class="form-label">Employee #&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.employee_number}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_active_group" data-toggle="tooltip" data-placement="top" title="group" >Reports To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.reports_to}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_dept" data-toggle="tooltip" data-placement="top" title="dept" >Lean Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.lean_status}}</a>	
+						
+					</div>	
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-3 col-lg-3 grid-col"></div>
+				<div class="col-sm-1 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_user_name"  class="form-label">Shift&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.shift}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_active_group" data-toggle="tooltip" data-placement="top" title="group" >Shift Start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.shift_start|time:'h:i A'}}</a>	
+					</div>
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label for="_dept" data-toggle="tooltip" data-placement="top" title="dept" >Shift End&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<a selected>{{user_list.shift_end|time:'h:i A'}}</a>	
+						
+					</div>	
+				</div>
+			</div>	
+				
+	</div>		
+</center>
+		
+		
+	</main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script> 
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'p3plcpnl0769'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
+
+</body>
+{% endblock %}
+
+</html>

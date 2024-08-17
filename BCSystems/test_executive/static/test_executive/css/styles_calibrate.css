@@ -1,0 +1,29 @@
+body {
+    padding: 40px;
+}
+div.party {
+    width:9px;
+    margin:4px 5px 0px 5px
+}
+.party #roomcount {
+ font-size:15px;   
+}
+
+textarea {
+ width: 600px;
+ height: 200px;
+ overflow:auto;
+ background-color: #696969;
+ font-size: 0.78em;
+ color: white;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ text-align:left;
+ vertical-align: top;
+ margin: 0px
+ padding-left:0;
+ padding-top:0;
+ padding-bottom:0.4em;
+ padding-right: 0.4em;
+ }
+ 
+ 

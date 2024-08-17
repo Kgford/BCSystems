@@ -1,0 +1,35 @@
+{% extends "test_executive/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ index_type }}
+{% endblock %}
+
+{% block body %}
+	<body>
+		<main role="main" class="container-fluid">
+			<div class="starter-template" >
+				<form class="col-30" action = "{% url 'test_exec:test_exec' %}"  method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<input type='hidden' id = "_global_color"  name = "_global_color" value = '{{global_color}}' >
+					<input type='hidden' id = "_test1_color"  name = "_test1_color" value = '{{test1_color}}' >
+					<input type='hidden' id = "_test2_color"  name = "_test2_color" value = '{{test2_color}}' >
+					<input type='hidden' id = "_test3_color"  name = "_test3_color" value = '{{test3_color}}' >
+					<input type='hidden' id = "_test4_color"  name = "_test4_color" value = '{{test4_color}}' >
+					<input type='hidden' id = "_test5_color"  name = "_test5_color" value = '{{test5_color}}' >
+					
+					<div class="mt-4 container bg-dark">
+						<center class="container mt-5 mb-5 d-flex justify-content-left">
+							<img  src="{% static 'test_executive/images/test_exec-banner.png' %}"  class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+						</center>
+					</div>	
+			<footer class="container">
+				<div class="container mt-5 mb-5 d-flex justify-content-left">
+					<p>&copy; 2010-2024 BC Power Systems, Inc. | All Rights Reserved | Site Design by&nbsp;&nbsp;&nbsp;<a href="http://automatedtestsolutions.com"><img src="{% static 'test_executive/images/logo_sm.png' %}" class="img-fluid"; "max-width: 30%;" "height 30%" ;alt="Responsive image"></a>
+					<a>&nbsp;&nbsp;|&nbsp;&nbsp;</a><a href="#">Back to top</a></p>
+				</div>		
+			</footer>
+		</main><!-- /.container -->
+	</body>	
+{% endblock %}
+</html>
