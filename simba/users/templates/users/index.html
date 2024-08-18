@@ -1,1 +1,0 @@
-{% extends "users/base.html" %}{% block body_block %}<div class="container">  <div class="jumbotron">        {% if user.is_authenticated %}		<h1>SIMBA Authorized user</h1>        <h2>Hello {{ user.username }}</h2>    {% else %}		<h1>SIMBA Security</h1>        <h2>Please Login</h2>    {% endif %}  </div></div>{% endblock %}

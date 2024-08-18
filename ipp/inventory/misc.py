@@ -1,1 +1,0 @@
-import datetimedef get_current_month:	today = datetime.date.today()	months = ['zero','January','February','March','April','May','June','July','August','September','October','November','December']	current_month = months[today.month]
