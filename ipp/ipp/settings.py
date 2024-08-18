@@ -1,5 +1,6 @@
 import os
-import django_heroku
+#import django_heroku
+import pyodbc
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -9,7 +10,7 @@ TEMPLATE_DIR = os.path.join(SETTINGS_PATH,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/tcli/media/'
+MEDIA_URL = '/ipp/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
 STATIC_URL = '/static/'
@@ -17,6 +18,9 @@ STATICFILES_DIRS = [STATIC_DIR]
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index' 
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,14 +33,24 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ipp-inventory-management.herokuapp.com','127.0.0.1']
-
+#ALLOWED_HOSTS = ['192.168.1.29','192.168.1.57','127.0.0.1','*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
     'users',
     'inventory',
+    'test',
+    'stock',
+    'shipping',
+    'qa',
+    'sales',
+    'manufacturing',
+    'planning',
+    'E2',
+    'process',
+    'barcode_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
@@ -83,13 +97,46 @@ WSGI_APPLICATION = 'ipp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        },
+
+        'E2': {
+            'ENGINE': 'sql_server.pyodbc',
+            'NAME': 'IPPMFGSQL',
+            'USER': 'sa',
+            'PASSWORD': 'Secure1!',
+            'HOST': 'IPP-E2',
+            'PORT': '',
+            'OPTIONS': {
+                'driver': 'SQL Server Native Client 11.0',
+                'unicode_results': True,
+            }
+        },   
+        
+        'TEST': {
+                'ENGINE': 'sql_server.pyodbc',
+                'NAME': 'ATE',
+                'USER': 'developer',
+                'PASSWORD': 'secure',
+                'HOST': 'INN-SQLEXPRESS\SQLEXPRESS',
+                'PORT': '',
+                'OPTIONS': {
+                    'driver': 'SQL Server Native Client 11.0',
+                    'unicode_results': True,
+                }               
+            },
+    }
 
 
 # Password validation
@@ -126,6 +173,7 @@ USE_TZ = True
 
 
 import dj_database_url 
+DATABASE_CONNECTION_POOLING = False
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 #django_heroku.settings(locals())

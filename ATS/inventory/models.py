@@ -10,6 +10,9 @@ class Inventory(models.Model):
     shelf = models.CharField("shelf",max_length=10,null=True,unique=False,default='N/A')  
     category = models.CharField("category",max_length=50,null=True,unique=False,default='N/A')   #GDC Spares, Critical Spares, SC-90 Upgrades
     status = models.CharField("status",max_length=50,null=True,unique=False,default='N/A')  #In-House, In-Field, In-Test, Out-Repair
+    image = models.ImageField(upload_to='inventory/', null=True, blank=True)
+    image_width = models.PositiveIntegerField(null=True)
+    image_height = models.PositiveIntegerField(null=True)
     remarks = models.CharField("remarks",max_length=500,null=True,unique=False,default='N/A')  
     purchase_order = models.CharField("purchase_order",max_length=40,null=False,unique=False,default='N/A')  
     active = models.BooleanField("active",unique=False,null=True,default=True)
@@ -18,6 +21,9 @@ class Inventory(models.Model):
     model_id = models.IntegerField(null=True,unique=False)
     location_id = models.IntegerField(null=True,unique=False)
     shelf_id = models.IntegerField(null=True,unique=False)
+    
+    def __str__(self):
+        return "%s %s" % (self.modelname, self.description)
 
     def serialize(self):
         return {

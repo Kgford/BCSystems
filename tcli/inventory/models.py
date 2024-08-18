@@ -3,76 +3,44 @@ from django.db import models
 # Create your Inventory models here.
 class Inventory(models.Model):
     id = models.AutoField(primary_key=True)
-    serial_number = models.CharField("serial number",max_length=50,null=False,unique=False,default='N/A')  
-    modelname = models.CharField("modelname",max_length=50,null=False,unique=False,default='N/A')  
-    description = models.CharField("description",max_length=200,null=False,unique=False,default='N/A')  
+    serial_number = models.CharField("serial number",max_length=50,null=True,unique=False,default='N/A')  
+    modelname = models.CharField("modelname",max_length=50,null=True,unique=False,default='N/A')  
+    description = models.CharField("description",max_length=200,null=True, unique=False,default='N/A')  
     locationname = models.CharField("locationname",max_length=100,null=False,unique=False,default='N/A')  
-    shelf = models.CharField("shelf",max_length=10,null=False,unique=False,default='N/A')  
-    category = models.CharField("category",max_length=50,null=False,unique=False,default='N/A')   #GDC Spares, Critical Spares, SC-90 Upgrades
-    status = models.CharField("status",max_length=50,null=False,unique=False,default='N/A')  #In-House, In-Field, In-Test, Out-Repair
-    quantity = models.IntegerField(null=True,unique=False,default=0)
+    shelf = models.CharField("shelf",max_length=10,null=True,unique=False,default='N/A')  
+    category = models.CharField("category",max_length=50,null=True,unique=False,default='N/A')   #GDC Spares, Critical Spares, SC-90 Upgrades
+    status = models.CharField("status",max_length=50,null=True,unique=False,default='N/A')  #In-House, In-Field, In-Test, Out-Repair
     remarks = models.CharField("remarks",max_length=500,null=True,unique=False,default='N/A')  
     purchase_order = models.CharField("purchase_order",max_length=40,null=False,unique=False,default='N/A')  
-    recieved_date = models.DateField(null=True)
-    shipped_date = models.DateField(null=True)
     active = models.BooleanField("active",unique=False,null=True,default=True)
     last_update = models.DateField(null=True)
     update_by = models.CharField("update_by",max_length=50,null=False,unique=False,default='N/A')  
     model_id = models.IntegerField(null=True,unique=False)
     location_id = models.IntegerField(null=True,unique=False)
     shelf_id = models.IntegerField(null=True,unique=False)
-    
-           
-    def get_absolute_url(self):
-        return reverse('inventory-detail', kwargs={'pk': self.pk})
-    
-    def add_new(self, serial_number, model,description, locationname, shelf, category, status, quantity , remarks,purchase_order,
-				recieved_date, shipped_date, active, last_update, update_by, model_id, locationname_id, shelf_id):
-        self.serial_number = serial_number
-        self.model = model
-        self.description = description
-        self.locationname = locationname
-        self.shelf = shelf
-        self.category = category
-        self.status = status
-        self.quantity  = quantity 
-        self.remarks = remarks
-        self.purchase_order = purchase_order
-        self.recieved_date = recieved_date
-        self.shipped_date = shipped_date
-        self.active = active
-        self.last_update = last_update
-        self.update_by = update_by
-        self.model_id = model_id
-        self.locationname_id = locationname_id
-        self.shelf_id = shelf_id
-        self.save()	
-    
+
     def serialize(self):
         return {
-            'id': self.id, 
-            'serial_number': self.serial_number,
-            'category': self.category,
-            'description':self.description,
-            'model':self.model,
-            'locationname':self.locationname,
-			'shelf':self.shelf,
-            'status': self.status,
-            'quantity': self.quantity,
-            'remarks': self.remarks,
-            'purchase_order': self.purchase_order,
-            'recieved_date': self.recieved_date,
-            'shipped_date': self.shipped_date,
-            'active': self.active,
-            'last_update': self.last_update,
-            'model_id': self.model_id,
-            'locationname_id': self.locationname_id,
-            'shelf_id': self.shelf_id,
-            'image': self.image,
+        'id': self.id, 
+        'serial_number': self.serial_number,
+        'category': self.category,
+        'description':self.description,
+        'model':self.modelname,
+        'locationname':self.locationname,
+        'shelf':self.shelf,
+        'status': self.status,
+        'remarks': self.remarks,
+        'purchase_order': self.purchase_order,
+        'active': self.active,
+        'last_update': self.last_update,
+        'model_id': self.model_id,
+        'locationname_id': self.locationname_id,
+        'shelf_id': self.shelf_id,
+        'image': self.image,
         }
         
     def add_event(self, type, date, comment):
-        r = Event(event_type=type,event_date=event_date, operator=operator, comment=comment, locationname=self.locationname,mr=mr, rma=rma, inventorys_id=self.id)
+        r = Event(event_type=type,event_date=event_date, operator=operator, comment=comment, locationname=self.locationname,mr=mr, rma=rma, inventory_id=self.id)
         self.add(r)
         self.commit()
 		
@@ -109,10 +77,11 @@ class Events(models.Model):
     comment = models.CharField("Item Serial number",max_length=500,null=False,unique=False,default='N/A')  
     locationname = models.CharField("Item Serial number",max_length=50,null=False,unique=False,default='N/A')  
     mr = models.CharField("Item Serial number",max_length=20,null=False,unique=False,default='N/A')  
+    rtv = models.CharField("Item Serial number",max_length=20,null=False,unique=False,default='N/A')  
     rma = models.CharField("Item Serial number",max_length=20,null=False,unique=False,default='N/A')  
     inventory_id = models.IntegerField(null=True,unique=False)
 	
-    def add_new(self, event_type, event_date,operator, comment, locationname, mr, rma, inventorys_id):
+    def add_new(self, event_type, event_date,operator, comment, locationname, mr, rma, inventory_id):
         self.event_type = event_type
         self.event_date = event_date
         self.operator = operator

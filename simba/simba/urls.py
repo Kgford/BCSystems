@@ -27,9 +27,8 @@ urlpatterns = [
     url(r'^special/',views.special,name='special'),
     url(r'^users/',include('users.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
-    path('inventory/', include("inventory.urls"),name='inven'),
-    path('inventory/', include("inventory.urls")),
-    path('inventory/', include("inventory.urls")),
+    path('retail/', include("retail.urls"),name='dashboard'),
+    path('sales/', include("retail.urls"),name='dashboard'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #if settings.DEBUG:

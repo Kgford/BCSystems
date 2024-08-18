@@ -15,6 +15,7 @@ class LocationView(View):
     form_class = LocationForm
     template_name = "index.html"
     success_url = reverse_lazy('locations:location')
+    
     def get(self, *args, **kwargs):
         form = self.form_class()
         try:
@@ -27,16 +28,16 @@ class LocationView(View):
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             timestamp = date.today()
-            name = request.POST['_name']
-            address = request.POST['_addr']
-            city = request.POST['_city']
-            state = request.POST['_state']
-            zipcode = request.POST['_zip']
-            phone = request.POST['_phone']
-            lat = request.POST['_lat']
-            lng = request.POST['_lng']
-            email = request.POST['_email']
-            website = request.POST['_web']
+            name = request.POST.get('_name', -1)
+            address = request.POST.get('_addr', -1)
+            city = request.POST.get('_city', -1)
+            state = request.POST.get('_state', -1)
+            zip_code = request.POST.get('_zip', -1)
+            phone = request.POST.get('_phone', -1)
+            lat = request.POST.get('_lat', -1)
+            lng = request.POST.get('_lng', -1)
+            email = request.POST.get('_email', -1)
+            website = request.POST.get('_web', -1)
             inventory_id = None
             active=True
             try:        
@@ -44,7 +45,7 @@ class LocationView(View):
                         active=active, inventory_id=inventory_id, created_on=timestamp, last_entry=timestamp, lat=lat, lng=lng)
             except IOError as e:
                 print ("location Save Failure ", e)	
-        return render (self.request,"locations/index.html",{"form": form, "index_type":"SIGNIN", "UserN":self.request.user, "index_type":"SITE LOCATIONS"})
+        return render (self.request,"locations/index.html",{"index_type":"SIGNIN", "UserN":self.request.user, "index_type":"SITE LOCATIONS"})
 
 def save_csv(delete):               
     #~~~~~~~~~~~Load location database from csv. must put this somewhere else later"

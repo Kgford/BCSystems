@@ -45,6 +45,12 @@
 				  <li class="nav-item">
 					<a class="nav-link" href="{% url 'equipment:equipment' %}">
 					  <span data-feather="file"></span>
+					  Search Equipment
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'equipment:newmodel' %}">
+					  <span data-feather="file"></span>
 					  Add Equipment
 					</a>
 				  </li>
@@ -65,22 +71,36 @@
 	</nav>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<input type='hidden' id = '_id' value = {{active_inv.id}} name='inventory_id' data-select='inventory_id'/>
-			<h1 class="h2">Create New Inventory Item</h1>
+		    {% if active_inv %}
+				<h1 class="h2">Update Inventory Item</h1>
+			{% else %}
+				<h1 class="h2">Create New Inventory Item</h1>
+			{% endif %}
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
-					<label> Last Update: 7/12/2020 Ford, Michael</label>
+					{% if active_inv %}
+						<label> Last Update: {{active_inv.last_update}}  By: {{active_inv.update_by}}</label>
+					{% else %}
+						<label> Create Date: {{today}}  By: {{request.user}}</label>
+					{% endif %}
 				</div>
 			</div>
 		</div>
 		<div align="center">
 			<form align="center" action="{% url 'inventory:items' %}"  method="post">
 			  {% csrf_token %}
-				<div class="row">
+			  <input type='hidden' id = 'inventory_id' value = {{active_inv.id}} name='inventory_id' data-select='inventory_id'/>
+			  <input type='hidden' id = '_operator' value = {{active_inv.operator}} name='inventory_id' data-select='operator'/>
+				 <div class="row">
 					<div class="col-sm-1 col-lg-6 grid-col">
 						<div class="form-group">
 							<label for="_desc">Description</label>
-							<input id = "_desc" name = "_desc" input class="form-control" placeholder="Enter description">
+							{% if active_inv %}
+								<input value = "{{active_inv.description}}" id = "_desc" name = "_desc" input class="form-control" placeholder="Enter description" required>
+							{% else %}
+								<input id = "_desc" name = "_desc" input class="form-control" placeholder="Enter description" required>
+							{% endif %}
+							
 						</div>
 					</div>
 				</div>
@@ -88,19 +108,28 @@
 					<div class="col-sm-1 col-lg-2 grid-col">
 						<div class="form-group">
 							<label>Category <span class="k-required"></span></label>
-							<select id='_cat' name = "_cat" class="browser-default custom-select custom-select-lg mb-3" >
-								<option selected>select menu</option>
-								<option data-desc = 'status', data-val = "Critical Spares">Critical Spares</option>
-								<option data-desc = 'status', data-val = "GDC Spares">GDC Spares</option>
-								<option data-desc = 'status', data-val = "SC-90 Upgrades">SC-90 Upgrades<option>
+							<select required id='_cat' onchange="this.nextElementSibling.value=this.value" name = "_cat" class="browser-default custom-select custom-select-lg mb-3" >
+								{% if active_inv %}
+									<option selected>{{active_inv.category}}</option>
+								{% else %}
+									<option value=""></option>
+								{% endif %}	
+								<option data-desc = 'status', value  = "Critical Spares">Critical Spares</option>
+								<option data-desc = 'category', value = "GDC Critical Spares">GDC Critical Spares</option>
+								<option data-desc = 'status', value  = "GDC Spares">GDC Spares</option>
+								<option data-desc = 'status', value  = "SC-90 Upgrades">SC-90 Upgrades<option>
 							</select>
 						</div>
-					</div>
+					</div>`
 					<div class="col-sm-2 col-lg-2 grid-col">
 						<div class="form-group">
 							<label>Status<span class="k-required"></span></label>
-							<select id='_stat' name = "_stat" class="browser-default custom-select custom-select-lg mb-3" >
-								<option selected>select menu</option>
+							<select id='_stat' onchange="this.nextElementSibling.value=this.value" name = "_stat" class="browser-default custom-select custom-select-lg mb-3"   required >
+								{% if active_inv %}
+									<option selected>{{active_inv.status}}</option>
+								{% else %}
+									<option value=""></option>
+								{% endif %}	
 								<option data-desc = 'in-house', value = "In-House">In-House</option>
 								<option data-desc = 'in-field', value = "In-Field">In-Field</option>
 								<option data-desc = 'in-test', value = "In-Test">In-Test</option>
@@ -113,8 +142,13 @@
 					<div class="col-sm-3 col-lg-2 grid-col">
 						<div class="form-group">
 							<label>Model: <span class="k-required"></span></label>
-							<select id='_model' name = "_model" class="browser-default custom-select custom-select-lg mb-3" >
+							<select required id='_model' name = "_model" class="browser-default custom-select custom-select-lg mb-3" >
 								<option selected>select menu</option>
+								{% if active_inv %}
+									<option selected>{{active_inv.modelname}}</option>
+								{% else %}
+									<option selected>Enter Type</option>
+								{% endif %}	
 								{% for model in models_list %}
 									<option data-desc = 'model', data-val = "{{model}}">{{model}}</option>
 								{% endfor %}
@@ -126,40 +160,34 @@
 					<div class="col-sm-2 col-lg-2 grid-col">
 						<div class="form-group">
 							<label for="_po">PO</label>
-							<input id = "_po"  name = "_po" input class="form-control" placeholder="Enter PO">
+							{% if active_inv %}
+								<input value = {{active_inv.purchase_order}} id = "_po"  name = "_po" input class="form-control" placeholder="Enter PO">
+							{% else %}
+								<input id = "_po"  name = "_po" input class="form-control" placeholder="Enter PO">
+							{% endif %}
+							
 						</div>
 					</div>				
 					<div class="col-sm-1 col-lg-2 grid-col">
 						<div class="form-group">
 							<label for="_sn">S/N</label>
-							<input id = "_sn" name = "_sn" input class="form-control" placeholder="Quantity">
+							{% if active_inv %}
+								<input value = {{active_inv.serial_number}} id = "_sn" name = "_sn" input class="form-control" placeholder="Quantity" required>
+							{% else %}
+								<input id = "_sn" name = "_sn" input class="form-control" placeholder="Quantity" required>
+							{% endif %}
+							
 						</div>	
-					</div>
-					<div class="col-sm-1 col-lg-2 grid-col">
-						<div class="form-group">
-							<label for="_Qn">Quantity</label>
-							<input id = "_Qn" name = "_Qn" input class="form-control" placeholder="Quantity">
-						</div>	
-					</div>
-				</div>
-				<div class="row">
-				   <div class="col-sm-2 col-lg-2 grid-col">
-						<div class="form-group">
-							<label for="_shipped">Shipped Date</label>
-							<input id = "_shipped" name = "_shipped" input class="form-control" placeholder="Enter  Date">
-						</div>
-					</div>
-					<div class="col-sm-2 col-lg-2 grid-col">
-						<div class="form-group">
-							<label for="_recieved">Recieved Date</label>
-							<input id = "_recieved" name = "_recieved" input class="form-control" placeholder="Enter Date">
-						</div>
 					</div>
 					<div class="col-sm-2 col-lg-2 grid-col">
 						<div class="form-group">
 							<label>Active: <span class="k-required"></span></label>
-							<select id='_active' name = "_active" class="browser-default custom-select custom-select-lg mb-3" >
-								<option selected>select menu</option>
+							<select required id='_active' name = "_active" class="browser-default custom-select custom-select-lg mb-3" >
+								{% if active_inv %}
+									<option selected>{{active_inv.active}}</option>
+								{% else %}
+									<option selected>select menu</option>
+								{% endif %}	
 								<option data-desc = 'active', data-val = "True">True</option>
 								<option data-desc = 'active', data-val = "False">False</option>
 							</select>
@@ -170,56 +198,41 @@
 					<div class="col-sm-2 col-lg-2 grid-col">
 						<div class="form-group">
 							<label>Site: <span class="k-required"></span></label>
-							<select id='_site' name = "_site" class="browser-default custom-select custom-select-lg mb-3" >
-								<option selected>select menu</option>
+							<select required id='_site' name = "_site" class="browser-default custom-select custom-select-lg mb-3" >
+								{% if active_inv %}
+									<option selected>{{active_inv.locationname}}</option>
+								{% else %}
+									<option value=""></option>
+								{% endif %}	
 								{% for location in locations_list %}
-								<option data-desc = 'location', data-val = "{{locationname}}">{{location}}</option>
-							{% endfor %}
+									<option data-desc = 'location', data-val = "{{locationname}}">{{location}}</option>
+								{% endfor %}
 							</select>
 						</div>
 					</div>
 					<div class="col-sm-2 col-lg-2 grid-col">
 						<div class="form-group">
 							<label>Shelf <span class="k-required"></span></label>
-							<select id='_shelf' name = "_shelf" class="browser-default custom-select custom-select-lg mb-3" >
-								<option selected>select</option>
-								<option data-desc = 'shelf', data-val = "A1">A1</option>
-								<option data-desc = 'shelf', data-val = "A2">A2</option>
-								<option data-desc = 'shelf', data-val = "A3">A3</option>
-								<option data-desc = 'shelf', data-val = "A4">A4</option>
-								<option data-desc = 'shelf', data-val = "A5">A5</option>
-								<option data-desc = 'shelf', data-val = "B1">B1</option>
-								<option data-desc = 'shelf', data-val = "B2">B2</option>
-								<option data-desc = 'shelf', data-val = "B3">B3</option>
-								<option data-desc = 'shelf', data-val = "B4">B4</option>
-								<option data-desc = 'shelf', data-val = "B5">B5</option>
-								<option data-desc = 'shelf', data-val = "C1">C1</option>
-								<option data-desc = 'shelf', data-val = "C2">C2</option>
-								<option data-desc = 'shelf', data-val = "C3">C3</option>
-								<option data-desc = 'shelf', data-val = "C4">C4</option>
-								<option data-desc = 'shelf', data-val = "B5">C5</option>
-								<option data-desc = 'shelf', data-val = "K1">K1</option>
-								<option data-desc = 'shelf', data-val = "K2">K2</option>
-								<option data-desc = 'shelf', data-val = "K3">K3</option>
-								<option data-desc = 'shelf', data-val = "K4">K4</option>
-								<option data-desc = 'shelf', data-val = "K5">K5</option>
-								<option data-desc = 'shelf', data-val = "L1">L1</option>
-								<option data-desc = 'shelf', data-val = "L2">L2</option>
-								<option data-desc = 'shelf', data-val = "L3">L3</option>
-								<option data-desc = 'shelf', data-val = "L4">L4</option>
-								<option data-desc = 'shelf', data-val = "L5">L5</option>
-								<option data-desc = 'shelf', data-val = "H1">H1</option>
-								<option data-desc = 'shelf', data-val = "H2">H2</option>
-								<option data-desc = 'shelf', data-val = "H3">H3</option>
-								<option data-desc = 'shelf', data-val = "H4">H4</option>
-								<option data-desc = 'shelf', data-val = "H">H5</option>
+							<select required id='_shelf' onchange="this.nextElementSibling.value=this.value" name = "_shelf" class="browser-default custom-select custom-select-lg mb-3" >
+								{% if active_inv %}
+									<option selected value={{active_inv.shelf}} >{{active_inv.shelf}}</option>
+								{% else %}
+									<option value=""></option>
+								{% endif %}	
+								{% for ishelf in shelf_list %}
+									<option data-desc = 'shelf', value = "{{ishelf}}">{{ishelf}}</option>
+								{% endfor %}
 							</select>
 						</div>
 					</div>
 					<div class="col-sm-2 col-lg-2 grid-col">
 						<div class="form-group">
 						<label><span class="k-required"></span></label>
-							<button id = "title" data-search="save"  class="btn btn-primary">Save</button>
+							{% if active_inv %}
+							    <button id = "_update" name = "_update"  data-search="save"  class="btn btn-primary">Update</button>
+							 {% else %}
+								<button id = "_save" name = "_save"  data-search="save"  class="btn btn-primary">Save</button>
+							 {% endif %}	
 						</div>
 					</div>
 				</div>	
@@ -239,7 +252,11 @@
 						  <a href="">
 							<img src="{% static 'inventory/images/inv1.jpg' %}" class="img-responsive" >
 							<div class="caption" >
-							  <p>Model iuieko874092</p>
+							 {% if active_inv %}
+							    <p>Model: {{active_inv.modelname}} </p>
+							 {% else %}
+								<p>Model:</p>
+							 {% endif %}	
 							</div>
 						  </a>
 						</div>

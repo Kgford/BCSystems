@@ -7,60 +7,128 @@
 
 {% block body %}
 <body >
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">ATS Inventory Manager</a>
-		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
+   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">ATS Inventory Manager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
 		</button>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-		<ul class="navbar-nav px-3">
-		  <li class="nav-item text-nowrap">
-			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-		  </li>
-		</ul>
-    </nav>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'dashboard:dashboard' %}" aria-disabled="true">Dashboard</a>
+				</li>
+				<li class="nav-item">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'inventory:inven' %}" aria-disabled="true">Inventory&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item active">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'inventory:items' %}" aria-disabled="true">Inventory Items&nbsp;&nbsp;&nbsp;</a>
+				</li><li class="nav-item">
+					<span data-feather="clipboard"></span>
+					<a class="nav-link" href="{% url 'equipment:equipment' %}">Equipment&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="dollar-sign"></span>
+					<a class="nav-link" href="{% url 'equipment:newmodel' %}">New Equipment&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item  ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'locations:location' %}" aria-disabled="true">Equipment Locations&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'users:logout' %}" aria-disabled="true">log out</a>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'users:base' %}" aria-disabled="true">home</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 	<div class="container-fluid">
 	  <div class="row">
 		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
 		  <div class="sidebar-sticky pt-3">
 			<ul class="nav flex-column">
-			     <li class="nav-item">
-					<a class="nav-link active" href="{% url 'index' %}">
-					  <span data-feather="home"></span>
-					  Home <span class="sr-only">(current)</span>
-					</a>
-			    </li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{% url 'inventory:inven' %}">
-					  <span data-feather="home"></span>
-					  Search Inventory <span class="sr-only">(current)</span>
-					</a>
-			    </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'inventory:items' %}">
+			   <li class="nav-item">
+					<a class="nav-link" href="{% url 'accounts:new_expense' %}">
 					  <span data-feather="file"></span>
-					  Save/Modify Inventory
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'equipment:equipment' %}">
-					  <span data-feather="file"></span>
-					  Save/Modify Equipment
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'locations:location' %}">
-					  <span data-feather="users"></span>
-					  Save/Modify Site locations
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'logout' %}">
-					  <span data-feather="layers"></span>
-					  Log out
+					  Dashboard
 					</a>
 				 </li>
-			 </ul>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'accounts:invoice_item' %}">
+					  <span data-feather="file"></span>
+					  Invoicing
+					</a>
+				 </li>
+				 <li class="nav-item">
+					<a class="nav-link active" href="{% url 'accounts:expenses' %}">
+					  <span data-feather="dollar-sign"></span>
+					  Expenses <span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'inventory:inven' %}">
+					  <span data-feather="layers"></span>
+					  Inventory
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'equipment:equipment' %}">
+					  <span data-feather="layers"></span>
+					  Equipment
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'client:client' %}">
+					  <span data-feather="layers"></span>
+					  Client
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'contractors:contractor' %}">
+					  <span data-feather="layers"></span>
+					  Contractors
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'vendor:vendor' %}">
+					  <span data-feather="layers"></span>
+					  vendor
+					</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'users:base' %}">
+					  <span data-feather="layers"></span>
+					  Home
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'users:logout' %}">
+					  <span data-feather="layers"></span>
+					  Logout
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'admin:index' %}">
+					  <span data-feather="layers"></span>
+					  Admin
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'atspublic:public' %}">
+					  <span data-feather="file"></span>
+					  Website
+					</a>
+				 </li>
+				  
+			</ul>
 		</div>
 	</nav>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">

@@ -1,1 +1,0 @@
-from django.urls import pathfrom . import viewsapp_name = "equipment"urlpatterns =[    path("", views.index, name="index"),    path("searchmodel", views.searchmodel, name ="searchmodel"),	path("loadmodel", views.loadmodel, name ="loadmodel"),	]

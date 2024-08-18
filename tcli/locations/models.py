@@ -1,5 +1,4 @@
 from django.db import models
-from inventory.models import Inventory
 
 # Create your locaions models here.
 class Location(models.Model):   
@@ -16,7 +15,7 @@ class Location(models.Model):
     image_file = models.CharField("image",max_length=50,null=True,unique=False)   
     created_on = models.DateField()
     last_entry = models.DateField()
-    inventory_id = models.ForeignKey(Inventory, on_delete=models.CASCADE, null=True)
+    inventory_id  = models.IntegerField(null=True,unique=False)
     lat = models.FloatField("lat",null=True,unique=False)
     lng = models.FloatField("lng",null=True,unique=False)
     shelf = models.CharField("shelf",max_length=25,null=False,unique=False,default='N/A')   

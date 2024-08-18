@@ -1,4 +1,4 @@
-{% extends "public/layout.html" %}
+{% extends "atspublic/layout.html" %}
 {% load static %}
 
 {% block title %}
@@ -8,201 +8,233 @@
 {% block body %}
   <body>
     <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Automated Test Solutions</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-</header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand" href="#">Automated Test Solutions</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+			  <ul class="navbar-nav mr-auto">
+				{% if user.is_authenticated %}
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'dashboard:dashboard' %}"  tabindex="-1" >Dashboard&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				{% else %}
+				<li class="nav-item">
+				  <a class="nav-link disabled" href="{% url 'dashboard:dashboard' %}"  tabindex="-1" >Dashboard Disabled&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				{% endif %}
+				<li class="nav-item active">
+				  <a class="nav-link" href="{% url 'atspublic:public' %}">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp; <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:software' %}"  tabindex="-1" >Software&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:racks' %}">Custom Fixtures&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:site' %}" tabindex="-1" >Field Support&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:robot_lab' %}" tabindex="-1" >Robot Lab&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:testmonial' %}"  tabindex="-1" >Testimonials&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:news' %}"  tabindex="-1" >ATS News letter&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'atspublic:news' %}"  tabindex="-1" >ATS Blog&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown03">
+						<a class="dropdown-item" href="{% url 'atspublic:contacts' %}">Contact us</a>
+						<a class="dropdown-item" href="{% url 'atspublic:signin' %}">Sign in</a>
+						<a class="dropdown-item" href="#">Log out</a>
+						<a class="dropdown-item" href="{% url 'atspublic:signup' %}">Sign up</a>
+						<a class="dropdown-item" href="#">Change Password</a>
+						<a class="dropdown-item" href="#">Reset Password</a>
+						<a class="dropdown-item" href="#">User Manual</a>
+					</div>
+				 </li>
+				 <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Staff</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown03">
+						{% if user.is_authenticated %}
+							<a class="dropdown-item" href="{% url 'users:logout' %}">Staff Logout</a>
+						{% else %}
+							<a class="dropdown-item" href="{% url 'users:user_login' %}">Staff Login</a>
+						{% endif %}
+						<a class="dropdown-item" href="{% url 'admin:password_change' %}">Change Staff Password</a>
+						<a class="dropdown-item" href="{% url 'users:base' %}">Reset Staff Password</a>
+						<a class="dropdown-item" href="{% url 'users:base' %}">Settings</a>
+						<a class="dropdown-item" href="{% url 'admin:index' %}">Administrator</a>
+					</div>
+				 </li>
+			</ul>
+			</div>
+		</nav>
+	</header>
 
-<main role="main">
+	<main role="main">
 
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-	  <li data-target="#myCarousel" data-slide-to="3"></li>
-	  <li data-target="#myCarousel" data-slide-to="4"></li>
-	  <li data-target="#myCarousel" data-slide-to="6"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-		<img src ='Mike\ATS.png'>
-        <div class="container">
-          <div class="carousel-caption text-center">
-			<p><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>
-			<p>
-				<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-				<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-				<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-				<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-				<button class="btn btn-lg btn-primary" href="#" role="button">Sign up today</button>
-			</p>
-          </div>
-        </div>
-      </div>
-	  <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src ="{% static 'public/images/Kayla_Fieldfox.JPG' %}">
-		<div class="container">
-          <div class="carousel-caption text-right">
-            <h1>Automated Testing.</h1>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
-	   <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src ="{% static 'public/images/suction.jpg' %}">
-		<div class="container">
-          <div class="carousel-caption text-right">
-            <h1>Automated Test Fixtures</h1>
-           <p><a class="btn btn-lg btn-primary" href="{% url 'robot_lab:robot' %}"  role="button">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src ="{% static 'public/images/Kayla.JPG %}">
-       <div class="container">
-          <div class="carousel-caption">
-            <h1>Expert System Testing.</h1>
-           <p><a class="btn btn-lg btn-primary" href="{% url 'workstations:racks' %}" role="button">Learn more</a></p>
-          </div>
-        </div>
-      </div>
-	   <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src ="{% static 'public/images/sat-site.jpg' %}">
-       <div class="container">
-          <div class="carousel-caption">
-            <h1>On-Site Field Support.</h1>
-           <p><a class="btn btn-lg btn-primary" href="#" role="button">Contact us</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-        <img src ="{% static 'public/images/software.jpg' %}">
-		<div class="container">
-          <div class="carousel-caption text-center">
-            <h1>Custom Applications.</h1>
-           <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
-  </div>
-	 <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-
-
-  <!-- Marketing messaging and featurettes
-  ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
-
-  <div class="container marketing">
-
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-      <div class="col-lg-4">
-        <img class="rounded-circle" src="{% static 'public/images/Box with USB stuff.JPG' %}"  width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text>
-        <h2>Custom Test Fixtures</h2>
-        <p>ATS Designs and Builds custom interfaces</p>
-        <p><a class="btn btn-secondary" href="racks.html" role="button">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="bd-placeholder-img rounded-circle" src="{% static 'public/images/Mike at work.JPG' %}"  width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text></img>
-        <h2>Systems</h2>
-        <p>RF Systems test.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="bd-placeholder-img rounded-circle" src="{% static 'public/images/keysite_rack.JPG' %}"  width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text></img>
-        <h2> Test Equipment</h2>
-        <p>RF Test Equipment Specialist</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
-
-    <!-- START THE FEATURETTES -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Visit the ATS Robotics Lab. &nbsp;&nbsp;&nbsp; <span class="text-muted">The future is today</span></h2>
-        <p class="lead">Automated Solutions Robotics Lab is always experimenting with different technologies. This hand is made with 5 Servo motors controlled by pulse modulated signals generated by an Arduino microcontroller.</p>
-      </div>
-	  <div class="embed-responsive embed-responsive-16by9">
-		<iframe width="400" height="400" src="https://www.youtube.com/embed/tSNaCLoC12Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+		  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		  <li data-target="#myCarousel" data-slide-to="1"></li>
+		  <li data-target="#myCarousel" data-slide-to="2"></li>
+		  <li data-target="#myCarousel" data-slide-to="3"></li>
+		  <li data-target="#myCarousel" data-slide-to="4"></li>
+		</ol>
+		<div class="carousel-inner">
+		  <div class="carousel-item active">
+			<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+			<!--img src ="{% static 'atspublic/images/ATS.png' %}"-->
+			<img src =https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763085/media/public/ATS_fyzriq.png>
+			<div class="container">
+			  <div class="carousel-caption text-center">
+				<p><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>
+				<p><a class="btn btn-lg btn-primary" href="{% url 'atspublic:signup' %}"  role="button">Sign up Today</a></p>
+			  </div>
+			</div>
+		  </div>
+		   <div class="carousel-item">
+			<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+			<!--img src ="{% static 'atspublic/images/suction.jpg' %}"-->
+			<img src = https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763403/media/public/suction_pwiejo.jpg>
+			<div class="container">
+			  <div class="carousel-caption text-right">
+				<h1>Automated Test Fixtures</h1>
+			   <p><a class="btn btn-lg btn-primary" href="{% url 'atspublic:robot_lab' %}"  role="button">Browse gallery</a></p>
+			  </div>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+			<!--img src ="{% static 'atspublic/images/kayla_front.jpg' %}"-->
+			<img src ="https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763562/media/public/kayla_front_bwrxpf.jpg">
+		   <div class="container">
+			  <div class="carousel-caption">
+				<h1>Expert System Testing.</h1>
+			   <p><a class="btn btn-lg btn-primary" href="{% url 'atspublic:racks' %}" role="button">Learn more</a></p>
+			  </div>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+			<!--img src ="{% static 'atspublic/images/softwarepic.jpg' %}"-->
+			<img src ="https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763581/media/public/softwarepic_cifio4.jpg">
+			<div class="container">
+			  <div class="carousel-caption text-center">
+				<h1>Custom Applications.</h1>
+			   <p><a class="btn btn-lg btn-primary" href="{% url 'atspublic:software' %}"  role="button">Browse gallery</a></p>
+			  </div>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+			<!--img src ="{% static 'atspublic/images/satsite.jpg' %}"-->
+			<img src ="https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763600/media/public/satsite_m3gadi.jpg">
+		   <div class="container">
+			  <div class="carousel-caption">
+				<h1>On-Site Field Support.</h1>
+			   <p><a class="btn btn-lg btn-primary" href="{% url 'atspublic:contacts' %}" role="button">Contact us</a></p>
+			  </div>
+			</div>
+		  </div>
+		  
 	  </div>
-      
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
-      <div class="col-md-5 order-md-1">
-        <svg  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+		 <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="sr-only">Next</span>
+		</a>
 	  </div>
-    </div>
+	  <!-- Marketing messaging and featurettes
+	  ================================================== -->
+	  <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <hr class="featurette-divider">
+	  <div class="container marketing">
+		<section class="jumbotron text-center">
+			<div class="container-fluid">
+				<img  src ="{% static 'atspublic/images/atsrf_logo.jpg' %}">
+			 </div>
+			 <div class="container-md">
+				  <p class="lead text-muted">Automated Test Solutions is dedicated to improving quality and streamlining the process of your Business Environment. Our applications feature  database integration, hardware integration, and automation software for every possible step of your business process.</p>
+				  <p class="lead text-muted"></p>
+				  <p class="lead text-muted">Production costs and risk of error is greatly reduced.  The possibilities for analyzing and reporting is greatly increased. Our staff is fully engadged in designing and providing reports, drawings, schematics, invoices, and bills of material upon request.</p>
+				  <p>
+					  <a href="{% url 'atspublic:contacts' %}" class="btn btn-primary my-2">Contact Us</a>
+					  <a href="{% url 'atspublic:testmonial' %}" class="btn btn-secondary my-2">Testimonials</a>
+				  </p>
+			  </div>
+		</section>
 
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
-      <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-      </div>
-    </div>
+		<!-- START THE FEATURETTES -->
+		<hr class="featurette-divider">
 
-    <hr class="featurette-divider">
+		<div class="row featurette">
+		  <div class="col-md-7 order-md-2">
+			<h2 class="featurette-heading">Software Solutions. <span class="text-muted"></span></h2>
+			<p class="lead"> Test Data handling, searching, and reporting will have unlimited expansion possibilities Led by its flagship Database/ATE software automation framework, ATS allows testers and developers alike to thoroughly test applications from a user’s perspective. Automated Test Solutions Services are both cost-effective and based on standard programming techniques and languages, making them ideal for development teams of all sizes.  </p>
+		  </div>
+		  <div class="col-md-5 order-md-1">
+			<!--img  src ="{% static 'atspublic/images/kaylafieldfox.png' %}"-->
+			<img  src ="https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763992/media/public/kaylafieldfox_nvu8zd.jpg">
+		 </div>
+		</div>
+		
+		<hr class="featurette-divider">
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<div class="row featurette">
+		  <div class="col-md-7">
+			<h2 class="featurette-heading">Database Integration<span class="text-muted"></span></h2>
+			<p class="lead">Database integration allows your application to expand and ’get smarter’ with each use.  All configurations and functions are derived from specific Database tables. All Data is saved and retrieved from specific Database tables. This allows for and extremely powerful flexible system that will adapt to any environment.</p>
+		  </div>
+		  <div class="col-md-5">
+			<!--img  src ="{% static 'atspublic/images/database.jpg' %}"-->
+			<img  src ="https://res.cloudinary.com/automated-test-solutions/image/upload/v1615763907/media/public/database_h8bzs8.jpg">
+		  </div>
+		</div>
+		<hr class="featurette-divider">
 
-    <!-- /END THE FEATURETTES -->
+		<div class="row featurette">
+		  <div class="col-md-7">
+			<h2 class="featurette-heading">Visit our Robotics Lab. &nbsp;&nbsp;&nbsp; <span class="text-muted"></span></h2>
+			<p class="lead">Automated Solutions Robotics Lab is always experimenting with different technologies. This hand is made with 5 Servo motors controlled by pulse modulated signals generated by an Arduino microcontroller.</p>
+		  </div>
+		  <div class="embed-responsive embed-responsive-16by9">
+			<iframe width="400" height="400" src="https://www.youtube.com/embed/tSNaCLoC12Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		  </div>
+		  
+		
+		<!-- /END THE FEATURETTES -->
 
-  </div><!-- /.container -->
-
-
-  <!-- FOOTER -->
-  <footer class="container">
-    <p class="float-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2010-2020 Automated Test Solutions &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-  </footer>
+	  </div><!-- /.container -->
+<!-- FOOTER -->
+<footer class="container">
+	<div class="container mt-5 mb-5 d-flex justify-content-center">
+		<a href="https://www.facebook.com/SIMBAProgramLLC" class="fa fa-facebook"></a>
+		<a href="https://www.youtube.com/channel/UCvNoBhL6vW80sgQWlQUGu3g?view_as=subscriber" class="fa fa-youtube"></a>
+		<a href="https://twitter.com/automatedtests1" class="fa fa-twitter"></a>
+		<a href="https://www.instagram.com/automatedtestsolutions/" class="fa fa-instagram"></a>
+	</div>
+	<div class="container mt-5 mb-5 d-flex justify-content-center">
+		<p>&copy; 2010-2020 Automated Test Solutions &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	</div>	
+	<p class="float-right"><a href="#">Back to top</a></p>
+</footer>
+<!-- FOOTER -->
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="{% static 'public/js/jquery.slim.min.js' %}"><\/script>')</script><script src="{% static 'public/css/bootstrap.bundle.js' %}" ></script></body>
+<script>window.jQuery || document.write('<script src="{% static 'atspublic/js/jquery.slim.min.js' %}"><\/script>')</script><script src="{% static 'atspublic/js/bootstrap.bundle.js' %}" ></script></body>
 {% endblock %}
 </html>

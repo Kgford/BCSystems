@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="IPP Inventory Management" content="">
+    <meta name="IPP Priority Management" content="">
 	<link rel="icon" type="image/x-icon" href="{% static 'users/images/ats_16X16.ico' %}">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>IPP Inventory Management</title>
+    <title>IPP Priority Management</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/product/">
 
@@ -58,12 +58,76 @@
    </div>
 </nav>
 
+  <div class="row">
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Planning</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">In development</a></li>
+				</ul>
+		{% endif %}
+	</div>
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Stock</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="{% url 'stock:priority' %}">Workload Priority</a></li>
+			</ul>
+		{% endif %}
+	</div>
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Quality</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="{% url 'qa:packing_list' %}">Workload Priority</a></li>
+				<li><a class="text-muted" href="{% url 'qa:certification' %}">CFC</a></li>
+			</ul>
+		{% endif %}
+	</div>
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Sales</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="{% url 'sales:customer' %}">Customer P/N</a></li>
+			</ul>
+		{% endif %}
+	</div>
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Shipping</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">In development</a></li>
+			</ul>
+		{% endif %}
+	</div>
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Manufacturing</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">In development</a></li>
+				</ul>
+		{% endif %}
+	</div>
+	<div class="col-6 col-md">
+		{% if user.is_authenticated %}
+			<h5>Test</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">In development</a></li>
+			</ul>
+		{% endif %}
+	</div>
+	
+   </div>
+
+
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
   <div class="col-md-5 p-lg-5 mx-auto my-5">
     <div class = "test">
-		<img src="{% static 'users/images/logo.png' %}" class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
-  </div>
-    <h1 class="display-4 font-weight-normal">Inventory Management</h1>
+		<img src="{% static 'users/images/logo_Trans.png' %}" class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+	</div>
+    <div class = "test">
+		<img src="{% static 'users/images/WPM_Trans.png' %}" class="img-fluid"; "max-width: 100%;" height auto" ;alt="Responsive image">
+	</div>
     <div>
 		{% block body_block %}
 		{% endblock %}
@@ -71,25 +135,12 @@
   </div>
   <div class="product-device shadow-sm d-none d-md-block"></div>
   <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-  <small class="d-block mb-3 text-muted">&copy; IPP Inventory Control © 2020</small>
+  <small class="d-block mb-3 text-muted">&copy; Automated Test Solutions Inc. © 2021</small>
 </div>
 
 
 
-<footer class="container py-5">
-  <div class="row">
-	<div class="col-6 col-md">
-	{% if user.is_authenticated %}
-		<h5>Inventory</h5>
-		<ul class="list-unstyled text-small">
-			<li><a class="text-muted" href="{% url 'inventory:inven' %}">Search Inventory</a></li>
-			<li><a class="text-muted" href="{% url 'inventory:items' %}">Create new Inventory Item</a></li>
-			<li><a class="text-muted" href="{% url 'inventory:items' %}">Event History</a></li>
-		</ul>
-	{% endif %}
-	</div>
-    </div>
-</footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src={% static 'users/js/jquery.slim.min.js' %}"><\/script>')</script><script src="{% static 'users/js/bootstrap.bundle.js' %}"></script></body>
 </html>

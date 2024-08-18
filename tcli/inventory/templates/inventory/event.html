@@ -123,32 +123,24 @@
 							<select id='_event' name = '_event'  class="browser-default custom-select custom-select-lg mb-3" value = {{event.type}} >
 						{% endif %}
 							<option selected>Enter Type</option>
-							<option data-desc = 'equipment', value = "standard">STD</option>
-							<option data-desc = 'equipment', value = "rma">RMA</option>
-							<option data-desc = 'equipment', value = "mr">MR</option>
-							<option data-desc = 'equipment', value = "repair">REPAIR</option>
-							<option data-desc = 'equipment', value = "update">UPDATE</option>
-							<option data-desc = 'equipment', value = "remove">REMOVE</option>
+							<option data-desc = 'equipment', value = "RMA">RMA</option>
+							<option data-desc = 'equipment', value = "MR">MR</option>
+							<option data-desc = 'equipment', value = "RTV">RTV</option>
+							<option data-desc = 'equipment', value = "VERIFIED">VERIFIED</option>
+							<option data-desc = 'equipment', value = "MISSING">MISSING</option>
+							<option data-desc = 'equipment', value = "TESTING">TESTING</option>
+							<option data-desc = 'equipment', value = "REPAIR">REPAIR</option>
+							<option data-desc = 'equipment', value = "FAILED">FAILED</option>
+							<option data-desc = 'equipment', value = "UPDATE">UPDATE</option>
+							<option data-desc = 'equipment', value = "UPDATE">UPDATE</option>
+							<option data-desc = 'equipment', value = "CONVERTED">CONVERTED</option>
+							<option data-desc = 'equipment', value = "OBSOLETE">OBSOLETE</option>
+							<option data-desc = 'equipment', value = "SHIPPED<">SHIPPED</option>
+							<option data-desc = 'equipment', value = "RETURNED">RETURNED</option>
 						</select>
 					</div>	
 				</div>
-			    <div class="col-sm-2 col-lg-2 grid-col">
-					<div class="form-group">
-						<label>Site: <span class="k-required"></span></label>
-						<input type='hidden' name='_loc' id='_loc' data-select='loc'/>
-						{% if event != 'n/a' %}
-							<select id='_loc' name = '_loc'  value = {{event.location}} class="browser-default custom-select custom-select-lg mb-3" >
-						{% else %}
-							<select id='_loc' name = '_loc' class="browser-default custom-select custom-select-lg mb-3" >
-						{% endif %}
-							<option selected>select location</option>
-							{% for location in locations_list %}
-								<option data-desc = 'location', data-val = "{{location}}">{{location}}</option>
-							{% endfor %}
-						</select>
-					</div>
-				</div>
-				<div class="row">
+			    <div class="row">
 					<div class="col-sm-2 col-lg-4 grid-col">
 						<div class="form-group">
 							<label for="_po">RMA</label>
@@ -156,6 +148,16 @@
 								<input id = "_rma"  name = "_rma" input class="form-control" value = {{event.rma}}>
 							{% else %}
 								<input id = "_rma"  name = "_rma" input class="form-control" placeholder="Enter RMA">
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-sm-2 col-lg-4 grid-col">
+						<div class="form-group">
+							<label for="_mr">RTV</label>
+							{% if event != 'n/a' %}
+								<input id = "_rtv"  name = "_rtv" input class="form-control" value = {{event.rtv}}>
+							{% else %}
+								<input id = "_rtv"  name = "_rtv" input class="form-control" placeholder="Enter RTV">
 							{% endif %}
 						</div>
 					</div>
@@ -181,6 +183,22 @@
 							<input id = "i_operator"  name = "_operator" input class="form-control" placeholder='Add operator'  required >
 						{% endif %}
 					</div>	
+				</div>
+				<div class="col-sm-2 col-lg-2 grid-col">
+					<div class="form-group">
+						<label>Site: <span class="k-required"></span></label>
+						<input type='hidden' name='_loc' id='_loc' data-select='loc'/>
+						{% if event != 'n/a' %}
+							<select id='_loc' name = '_loc'  value = {{event.location}} class="browser-default custom-select custom-select-lg mb-3" >
+						{% else %}
+							<select id='_loc' name = '_loc' class="browser-default custom-select custom-select-lg mb-3" >
+						{% endif %}
+							<option selected>select location</option>
+							{% for location in locations_list %}
+								<option data-desc = 'location', data-val = "{{location}}">{{location}}</option>
+							{% endfor %}
+						</select>
+					</div>
 				</div>
 				<div class="col-sm-1 col-lg-2 grid-col">
 					<div class="form-group">

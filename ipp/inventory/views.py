@@ -268,6 +268,7 @@ def update_inv(request):
         inventory_id = request.POST.get('i_id', -1)
         del_inv = request.POST.get('del_inv', -1)
         operator = request.POST.get('_operator', -1)
+        Locations_list = []
         event = 'n/a'
         print('inventory_id =',inventory_id)
         active_inv = Inventory.objects.filter(id=inventory_id)
@@ -305,6 +306,7 @@ def update_inv(request):
                 
 def save_event(request):
     if request.method == 'POST':
+        Locations_list = []
         timestamp = date.today()
         update_inv = request.POST.get('update_inv', -1)
         del_inv = request.POST.get('del_inv', -1)
@@ -394,6 +396,7 @@ def items(request):
     parts_list = []
     description_list = []
     vendor_list = []
+    locations_list = []
     event = 'n/a'
     timestamp = date.today()
     operator = request.user
@@ -474,9 +477,10 @@ def items(request):
         parts_list = Inventory.objects.order_by('part_number').values_list('part_number', flat=True).distinct()
         description_list = Inventory.objects.order_by('description').values_list('description', flat=True).distinct()
         vendor_list = Inventory.objects.order_by('vendor').values_list('vendor', flat=True).distinct()
+        Locations_list = []
     except IOError as e:
          print ("Lists load Failure ", e)	
-    return render (request,"inventory/items.html",{"today":date.today(), "locations_list":locations_list, "models_list":models_list, "shelf_list":shelves_list,'active_operator':operator})
+    return render (request,"inventory/items.html",{"today":date.today(), 'active_operator':operator})
 
 def item(request):
     parts_list = []

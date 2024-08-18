@@ -311,7 +311,7 @@ class Retail_ZipCode(models.Model):
 	LocalTax = models.DecimalField("LocalTax",max_digits=10, decimal_places=2,null=True,unique=False)
 	TotalTax = models.DecimalField("TotalTax",max_digits=10, decimal_places=2,null=True,unique=False)
 	FiscalDate = models.DateField(null=True) 
-	
+    
  
     
     

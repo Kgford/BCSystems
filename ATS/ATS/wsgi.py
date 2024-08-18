@@ -1,5 +1,5 @@
 """
-WSGI config for tcli project.
+WSGI config for ats project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

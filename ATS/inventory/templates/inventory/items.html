@@ -7,68 +7,78 @@
 
 {% block body %}
 <body >
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">ATS Inventory Manager</a>
-		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">ATS Inventory Manager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
 		</button>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-		<ul class="navbar-nav px-3">
-		  <li class="nav-item text-nowrap">
-			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-		  </li>
-		</ul>
-    </nav>
-	<div class="container-fluid">
-	  <div class="row">
-		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-		  <div class="sidebar-sticky pt-3">
-			<ul class="nav flex-column">
-			     <li class="nav-item">
-					<a class="nav-link active" href="{% url 'index' %}">
-					  <span data-feather="home"></span>
-					  Home <span class="sr-only">(current)</span>
-					</a>
-			    </li>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'dashboard:dashboard' %}" aria-disabled="true">Dashboard</a>
+				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{% url 'inventory:inven' %}">
-					  <span data-feather="home"></span>
-					  Search Inventory <span class="sr-only">(current)</span>
-					</a>
-			    </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'inventory:items' %}">
-					  <span data-feather="file"></span>
-					  Create Inventory items
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'equipment:equipment' %}">
-					  <span data-feather="file"></span>
-					  Search Equipment
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'equipment:newmodel' %}">
-					  <span data-feather="file"></span>
-					  Add Equipment
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'locations:location' %}">
-					  <span data-feather="users"></span>
-					  Add Site locations
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'logout' %}">
-					  <span data-feather="layers"></span>
-					  Log out
-					</a>
-				 </li>
-			 </ul>
+				<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'inventory:inven' %}" aria-disabled="true">Inventory&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item active">
+				<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'inventory:items' %}" aria-disabled="true">Inventory Items&nbsp;&nbsp;&nbsp;</a>
+				</li><li class="nav-item">
+					<span data-feather="clipboard"></span>
+					<a class="nav-link" href="{% url 'equipment:equipment' %}">Equipment&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+					<span data-feather="dollar-sign"></span>
+					<a class="nav-link" href="{% url 'barcode_app:barcode' %}">Barcodes&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="dollar-sign"></span>
+					<a class="nav-link" href="{% url 'equipment:newmodel' %}">New Equipment&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item  ">
+				<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'locations:location' %}" aria-disabled="true">Locations&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item ">
+				<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'users:logout' %}" aria-disabled="true">log out</a>
+				</li>
+				<li class="nav-item ">
+				<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'users:base' %}" aria-disabled="true">home</a>
+				</li>
+			</ul>
 		</div>
 	</nav>
+	<div class="container-fluid">
+	  <div class="row">
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block navbar navbar-dark bg-dark sidebar collapse" >
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand text-left sidebar-brand m-0" href="#">
+				<span class="text-left d-lg-flex flex-wrap justify-content-lg-start" style="font-size: 12;">ATS Navigation</span>
+				<div class="sidebar-brand-icon rotate-n-15"></div><div class="sidebar-brand-text mx-3"></div></a>
+				<hr class="sidebar-divider my-0">
+				<ul class="nav navbar-nav text-light nav flex-column" id="accordionSidebar">
+					<li class="nav-item"><a class="nav-link" href="{% url 'dashboard:dashboard' %}"><i class="fas fa-chart-line"></i><span>&nbsp;&nbsp;&nbsp;Dashboard</span></a></li>
+					<li class="nav-item"></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:invoice_item' %}"><i class="fa fa-balance-scale"></i><span>&nbsp;&nbsp;&nbsp;Invoicing</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:quote_item' %}"><i class="fa fa-address-book"></i><span>&nbsp;&nbsp;&nbsp;Quotes</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:income' %}"><i class="fa fa-credit-card"></i><span>&nbsp;&nbsp;&nbsp;Income</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'assets:assets' %}"><i class="fas fa-truck"></i><span>&nbsp;&nbsp;&nbsp;Capital Assets</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:new_expense' %}"><i class="fas fa-gas-pump"></i><span style="font-family: Nunito, sans-serif;"&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;Expenses</span></a>
+					<li class="nav-item active"><a class="nav-link" href="{% url 'inventory:inven' %}"><i class="fa fa-barcode"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Inventory</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'equipment:equipment' %}"><i class="fa fa-cogs"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Equipment</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'client:client' %}"><i class="fa fa-user"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Clients</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'contractors:contractor' %}"><i class="fa fa-wrench"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Contractors</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'vendor:vendor' %}"><i class="fab fa-connectdevelop"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Vendors</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'users:base' %}"><i class="fas fa-tachometer-alt"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Home</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}"><i class="far fa-sun"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Settings</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'atspublic:public' %}"><i class="fa fa-male"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Website</span></a></li>
+				</ul>
+			<div class="text-center d-none d-md-inline"></div>
+			</div>
+		</nav>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		    {% if active_inv %}

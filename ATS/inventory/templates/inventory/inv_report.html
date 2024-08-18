@@ -3,9 +3,8 @@
 <HTML>
 <HEAD>
 	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1255" /> 
-	<link rel="icon" type="image/x-icon" href="{% static 'users/images/rings_16x16.ico' %}">0
-	<meta name="ATS Inventory Management" content="">
-	<script type="text/javascript" src="{% static 'inventory/js/load_report.js' %}"></script>
+	<link rel="icon" type="image/x-icon" href="{% static 'inventory/images/rings_16x16.ico' %}">
+	<meta name="TCLI Inventory Management" content="">
 	<script
 	  src="https://code.jquery.com/jquery-2.2.4.min.js"
 	  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -29,11 +28,13 @@
 
 
 <BODY>
-<style> body{background-color: #FFFFFF;} .TTL{color: #FFFFFF; background-color: #AACCFF; text-align: left; border: 1px solid #A0C0D0; padding-left: 15px; padding-right: 15px; font-weight: bold;} .HDR{color: #0099AA; background-color: #E0FFFF; text-align: left; border: 1px solid #D9E9F9; padding-left: 10px; padding-right: 10px; font-weight: normal;} .ROW0{background-color: #F0FFFF;} .ROW1{background-color: #F0F8FD;} .STR0{font-weight: normal; text-align: left; border-bottom: 1px solid #CCCCCC;} .STR0S{font-weight: normal; text-align: left; border-bottom: 1px solid #444444;} .NUM0{font-weight: normal; text-align: right; border-bottom: 1px solid #CCCCCC;} .NUM0S{font-weight: normal; text-align: right; border-bottom: 1px solid #444444;} td{padding-left: 5px; padding-right: 5px;} table{border-collapse: collapse;} </style>
+<style> body{background-color: #FFFFFF;} .TTL{color: #FFFFFF; background-color: #AACCFF; text-align: left; border: 1px solid #A0C0D0; padding-left: 15px; padding-right: 15px; font-weight: bold;} .HDR{color: #0099AA; background-color: #E0FFFF; text-align: left; border: 0px solid #D9E9F9; padding-left: 10px; padding-right: 10px; font-weight: bold;} .ROW0{background-color: #F0FFFF;} .ROW1{background-color: #F0F8FD;} .STR0{font-weight: normal; text-align: left; border-bottom: 1px solid #CCCCCC;} .STR0S{font-weight: normal; text-align: left; border-bottom: 1px solid #444444;} .NUM0{font-weight: normal; text-align: right; border-bottom: 1px solid #CCCCCC;} .NUM0S{font-weight: normal; text-align: right; border-bottom: 1px solid #444444;} td{padding-left: 5px; padding-right: 5px;} table{border-collapse: collapse;} </style>
 <style>
 .center {
   display: block;
-  margin-left: 150px;
+  font-size: large;
+  font-weight-bold;
+  margin-left: 0px;
   margin-right: auto;
   width: 40%;
 }
@@ -42,39 +43,59 @@
 img {
   border: 0px solid #ddd; /* Gray border */
   border-radius: 0px;  /* Rounded border */
-  padding: 5px; /* Some padding */
+  padding: 40px; /* Some padding */
   width: 250px; /* Set a small width */
 }
 
 </style>
-<link rel="stylesheet" href="{% static 'users/css/styles.css"' %}">
+<link rel="stylesheet" href="{% static 'inventory/css/styles.css' %}">
 <div class="center">
-	<img src="{% static 'users/images/logo.png' %}" class="center"; "max-width: 100%;" height auto" ;alt="Responsive image">
+	<img src="{% static 'inventory/images/logo.png' %}" class="center"; "max-width: 100%;" height auto" ;alt="Responsive image">
 	<p></p>
 	<p></p>
 	<p></p>
  </div>
 <TABLE>
 <COL/><COL span="25" style="text-align: center;" /><TBODY>
-	<TR height="20" width='600'><TD NOWRAP="" class="TTL">TCLI Monthly Inventory Report  </TD></TR>
 	<TR height="20" ><TD NOWRAP="" class="STR0"> Report Date:</TD><TD NOWRAP="" class="STR0"> {{today}}</TD></TR>
+	<TR height="20" width='8600'><TD NOWRAP="" class="TTL">TCLI Monthly Inventory Report  </TD></TR>
+	<TR height="20" ><TD class="HDR"> Category:   {{category}} </TD></TR>
+	
 </TBODY></TABLE>
 
 
 <BR><TABLE>
 <TBODY>
-	<input type="hidden" id="list" value = {{inv_list}} >
-	<BR><TABLE id = "model_table">
+	<BR><TABLE>
+	<TBODY>
+		<TR height="20" ><TD class="TTL"> Inventory Item Summary:</TD></TR>
+	</TBODY></TABLE>
+	{% for model in models_list %}
+		<BR><TABLE>
+		<TBODY>
+		
+		<TR height="20" width='8600' >
+			<TD NOWRAP="" class="TTL"> Model:  </TD><TD NOWRAP="" class="STR0"> {{model}}</TD>
+			<TD NOWRAP="" class="HDR"> Total: </TD><TD NOWRAP="" class="STR0"> {{model.total_quan}} </TD>
+			<TD NOWRAP="" class="HDR"> In-House: </TD><TD NOWRAP="" class="STR0"> {{model.house_quan}} </TD>
+			<TD NOWRAP="" class="HDR"> On-Site: </TD><TD NOWRAP="" class="STR0"> {{model.field_quan}} </TD>
+			<TD NOWRAP="" class="HDR"> In-Repair:</TD><TD NOWRAP="" class="STR0">  {{model.repair_quan}} </TD>
+			<TD NOWRAP="" class="HDR"> Missing : </TD><TD NOWRAP="" class="STR0"> {{model.field_quan}} </TD>
+		</TR>
+		</TBODY></TABLE>
+    {% endfor %}
 </TBODY></TABLE>		
 				
 
 <BR><TABLE>
 <TBODY>
-<TR height="20" ><TD class="HDR"> Inventory Summary </TD></TR>
-	<TR height="20" ><TD NOWRAP="True" class="SHR"> Category </TD><TD NOWRAP="True" class="SHR"> Status </TD><TD NOWRAP="True"  class="SHR"> Description </TD><TD NOWRAP="True"  class="SHR"> location </TD><TD class="SHR"> Operator </TD><TD NOWRAP="True" class="SHR"> Model </TD><TD NOWRAP="True"  class="SHR"> serial_number </TD></TR>
+<TR><TD NOWRAP=""  class= "center">       Inventory Items List </TD></TR>
+	<TR height="20" ><TD NOWRAP="True" class="SHR"> Category </TD><TD NOWRAP="True" class="SHR"> Status </TD><TD NOWRAP="True"  class="SHR"> Model </TD><TD NOWRAP="True"  class="SHR"> S/N </TD><TD class="SHR"> Location </TD>><TD NOWRAP="True"  class="SHR">Description </TD></TR>
 	{% for item in inv_list %}
-		<TR height="20" ><TD NOWRAP="True" class="STR0"> {{item.category} </TD><TD NOWRAP="True" class="STR0"> {{item.status}}</TD><TD NOWRAP="" class="STR0"> {{item.description}} </TD><TD NOWRAP="" class="STR0"> {{item.locationname}}</TD><TD NOWRAP="" class="STR0"> {{item.operator}} </TD><TD NOWRAP="" class="STR0"> {{item.model}} </TD><TD NOWRAP="" class="STR0"> {{item.serial_number}} </TD></TR>
+		<TR height="20" ><TD NOWRAP="True" class="STR0"> {{item.category}} </TD><TD NOWRAP="True" class="STR0"> {{item.status}}</TD><TD NOWRAP="" class="STR0"> {{item.modelname}} </TD><TD NOWRAP="" class="STR0"> {{item.serial_number}}</TD><TD NOWRAP="" class="STR0"> {{item.locationname}} </TD><TD NOWRAP="" class="STR0"> {{item.description}} </TD></TR>
 	{% endfor %}
 </TBODY></TABLE>
+<script type="text/javascript" src="{% static 'inventory/js/load_report.js' %}"></script>
+
 
 </BODY></HTML>

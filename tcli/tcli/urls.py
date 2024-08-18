@@ -1,5 +1,6 @@
 """tcli URL Configuration
 
+
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -17,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
+from django.conf.urls.static import static
+from django.conf import settings
 from users import views
 
 
@@ -31,7 +34,7 @@ urlpatterns = [
     path('inventory/', include("inventory.urls"),name='inven'),
     path('locations/', include("locations.urls")),
     path('equipment/', include("equipment.urls")),
-    ]
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #if settings.DEBUG:
     #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  

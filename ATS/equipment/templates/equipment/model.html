@@ -7,77 +7,78 @@
 
 {% block body %}
 <body>
-   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">ATS Inventory Manager</a>
-		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">ATS Equipment Manager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
 		</button>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-		<ul class="navbar-nav px-3">
-		  <li class="nav-item text-nowrap">
-			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-		  </li>
-		</ul>
-    </nav>
-	<div class="container-fluid">
-	  <div class="row">
-		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-		  <div class="sidebar-sticky pt-3">
-			<ul class="nav flex-column">
-			     <li class="nav-item">
-					<a class="nav-link active" href="{% url 'index' %}">
-					  <span data-feather="home"></span>
-					  Home <span class="sr-only">(current)</span>
-					</a>
-			    </li>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'dashboard:dashboard' %}" aria-disabled="true">Dashboard</a>
+				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{% url 'inventory:inven' %}">
-					  <span data-feather="home"></span>
-					  Search Inventory <span class="sr-only">(current)</span>
-					</a>
-			    </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'inventory:items' %}">
-					  <span data-feather="file"></span>
-					  Create Inventory items
-					</a>
-				  </li>
-				  {% if mod == -1 %}
-						<li class="nav-item">
-						<a class="nav-link" href="{% url 'equipment:showimage' %}">
-						  <span data-feather="file"></span>
-						  Add Image
-						</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="{% url 'equipment:equipment' %}">
-						  <span data-feather="file"></span>
-						  Search Equipment
-						</a>
-					  </li>
-				  {% else %}
-					  <li class="nav-item">
-						<a class="nav-link" href="{% url 'equipment:newmodel' %}">
-						  <span data-feather="file"></span>
-						  Create new Model 
-						</a>
-					  </li>
-				  {% endif %}
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'locations:location' %}">
-					  <span data-feather="users"></span>
-					  Add Site locations
-					</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'logout' %}">
-					  <span data-feather="layers"></span>
-					  Log out
-					</a>
-				 </li>
-			 </ul>
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'inventory:inven' %}" aria-disabled="true">Inventory&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'inventory:items' %}" aria-disabled="true">Inventory Items&nbsp;&nbsp;&nbsp;</a>
+				</li><li class="nav-item ">
+					<span data-feather="clipboard"></span>
+					<a class="nav-link" href="{% url 'equipment:equipment' %}">Equipment</a>
+				</li>
+				<li class="nav-item active">
+					<span data-feather="dollar-sign"></span>
+					<a class="nav-link" href="{% url 'equipment:newmodel' %}">New Equipment&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item">
+					<span data-feather="dollar-sign"></span>
+					<a class="nav-link" href="{% url 'barcode_app:barcode' %}">Barcodes&nbsp;&nbsp;</a>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'locations:location' %}" aria-disabled="true">Locations&nbsp;&nbsp;&nbsp;</a>
+				</li>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'users:logout' %}" aria-disabled="true">log out</a>
+				</li>
+				<li class="nav-item ">
+					<span data-feather="log-out"></span>
+					<a class="nav-link" href="{% url 'users:base' %}" aria-disabled="true">home</a>
+				</li>
+			</ul>
 		</div>
 	</nav>
+	<div class="container-fluid">
+	  <div class="row">
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block navbar navbar-dark bg-dark sidebar collapse" >
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand text-left sidebar-brand m-0" href="#">
+				<span class="text-left d-lg-flex flex-wrap justify-content-lg-start" style="font-size: 12;">ATS Navigation</span>
+				<div class="sidebar-brand-icon rotate-n-15"></div><div class="sidebar-brand-text mx-3"></div></a>
+				<hr class="sidebar-divider my-0">
+				<ul class="nav navbar-nav text-light nav flex-column" id="accordionSidebar">
+					<li class="nav-item"><a class="nav-link" href="{% url 'dashboard:dashboard' %}"><i class="fas fa-chart-line"></i><span>&nbsp;&nbsp;&nbsp;Dashboard</span></a></li>
+					<li class="nav-item"></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:invoice_item' %}"><i class="fa fa-balance-scale"></i><span>&nbsp;&nbsp;&nbsp;Invoicing</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:quote_item' %}"><i class="fa fa-address-book"></i><span>&nbsp;&nbsp;&nbsp;Quotes</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:income' %}"><i class="fa fa-credit-card"></i><span>&nbsp;&nbsp;&nbsp;Income</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'accounts:expenses' %}"><i class="fas fa-book-open"></i><span style="font-family: Nunito, sans-serif;"&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;Expenses</span></a>
+					<li class="nav-item"><a class="nav-link" href="{% url 'inventory:inven' %}"><i class="fa fa-barcode"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Inventory</span></a></li>
+					<li class="nav-item active"><a class="nav-link" href="{% url 'equipment:equipment' %}"><i class="fa fa-cogs"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Equipment</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'client:client' %}"><i class="fa fa-male"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Clients</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'contractors:contractor' %}"><i class="fa fa-wrench"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Contractors</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'vendor:vendor' %}"><i class="fab fa-connectdevelop"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Vendors</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'users:base' %}"><i class="fas fa-tachometer-alt"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Home</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}"><i class="far fa-sun"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Settings</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'atspublic:public' %}"><i class="fa fa-bomb"></i><span style="font-family: Nunito, sans-serif;">&nbsp;&nbsp;&nbsp;Website</span></a></li>
+				</ul>
+				<div class="text-center d-none d-md-inline"></div>
+			</div>
+		</nav>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 	    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			{% if mod == -1 %}
@@ -87,12 +88,11 @@
 				{% endif %}
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group mr-2">
-					<button type="button" id = "share" class="btn btn-sm btn-outline-secondary">Share</button>
-					<button type="button" id = "export" class="btn btn-sm btn-outline-secondary">Export</button>
+					<a style = "color:#CCD1D1" > {{operator}} logged in</a>
 				</div>
 			</div>
 		</div>
-		<form action = "{% url 'equipment:savemodel' %}"  method="post" enctype="multipart/form-data">
+		<form action = "{% url 'equipment:newmodel' %}"  method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			<input type='hidden' id = 'm_id' name='m_id' value = {{mod.id}} data-select='inventory_id'/>
 			<input type='hidden' id = 'model' name='model' value = {{mod.model}} data-select='model'/>
@@ -126,15 +126,19 @@
 							{% else %}
 								<option selected>{{mod.category}}</option>
 							{% endif %}
-							<option data-desc = 'equipment', data-val = "modem">MODEM</option>
-							<option data-desc = 'equipment', data-val = "buc">BUC</option>
-							<option data-desc = 'equipment', data-val = "bdc">BDC</option>
-							<option data-desc = 'equipment', data-val = "lna">LNA</option>
-							<option data-desc = 'equipment', data-val = "lnb">LNB</option>
-							<option data-desc = 'equipment', data-val = "amp">AMPLFIER</option>
-							<option data-desc = 'equipment', data-val = "ant">ANTENNA</option>
-							<option data-desc = 'equipment', data-val = "contr">CONTROLLER</option>
-							<option data-desc = 'equipment', data-val = "pcb">PCBOARD</option>
+							<option data-desc = 'equipment', data-val = "TEST FIXTURE">TEST FIXTURE</option>
+							<option data-desc = 'equipment', data-val = "CONTROLLER">CONTROLLER</option>
+							<option data-desc = 'equipment', data-val = "COMPUTER">COMPUTER</option>
+							<option data-desc = 'equipment', data-val = "PCBOARD">PCBOARD</option>
+							<option data-desc = 'equipment', data-val = "ROBOT">ROBOT</option>
+							<option data-desc = 'equipment', data-val = "MODEM">MODEM</option>
+							<option data-desc = 'equipment', data-val = "BUC">BUC</option>
+							<option data-desc = 'equipment', data-val = "BDC">BDC</option>
+							<option data-desc = 'equipment', data-val = "LNA">LNA</option>
+							<option data-desc = 'equipment', data-val = "LNB">LNB</option>
+							<option data-desc = 'equipment', data-val = "AMPLFIER">AMPLFIER</option>
+							<option data-desc = 'equipment', data-val = "ANTENNA">ANTENNA</option>
+							<option data-desc = 'equipment', data-val = "POWER TOOLS">POWER TOOLS</option>
 						</select>
 					</div>	
 				</div>	
@@ -164,11 +168,28 @@
 				</div>
 				<div class="col-sm-1 col-lg-2 grid-col">
 					<div class="form-group">
-						<label for="_vendor">Vendor</label>
-						{% if mod == -1 %}
-							<input id = "_vendor" name = "_vendor" input class="form-control" placeholder="Enter Vendor"  required autofocus>
+					<label>Vendor<span class="k-required"></span></label>
+					<select id='_vendor' name ='_vendor' class="browser-default custom-select custom-select-lg mb-3" required>
+						{% if mod == -1%}
+							<option data-desc = 'vendor', value = "select menu">select Vendor</option>
 						{% else %}
-							<input id = "_vendor" name = "_vendor" input class="form-control" value = "{{mod.vendor}}" required autofocus>
+							<option selected>{{mod.vendor}}</option>
+						{% endif %}	
+						{% for ven in vendor_list%}
+							<option data-desc = 'vendor', value = "{{ven}}">{{ven}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col-sm-3 col-lg-4 grid-col">
+					<div class="form-group">
+						<label>Comment: </label><br>
+						{% if mod == -1 %}
+							<textarea id="_comments" name = "_comments" rows="3" cols="68" style="align-content:left"></textarea>
+						{% else %}
+							<textarea id="_comments" name = "_comments" rows="3" cols="68" style="align-content:left">{{mod.comments}}</textarea>
 						{% endif %}
 					</div>
 				</div>
@@ -176,36 +197,18 @@
 			<div class="row">	
 				<div class="col-sm-3 col-lg-4 grid-col">
 					<div class="form-group">
-						<label>Comments: </label><br>
-						{% if mod == -1 %}
-							<textarea id="_com" name = "_com" rows="3" cols="68" style="align-content:left"></textarea>
-						{% else %}
-							<textarea id="_com" name = "_com" rows="3" cols="68" style="align-content:left">{{mod.comments}}</textarea>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-			<div class="row">	
-				<div class="col-sm-3 col-lg-4 grid-col">
-					<div class="form-group">
-					    <label for="_upload"> Select an Equipment Image</label> 
-						<input type="file" name="_upload" id="_upload"> 
-						
+					    {{ form.as_p }}
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-2 col-lg-3 grid-col">
 					<div class="thumbnail">
-					    <img src="{{ uploaded_file_url }}" class="img-responsive" alt="Cinque Terre">
-						<div class="caption" >
-							{% if mod == -1 %}
-								<p id = "_md" name = '_md' >Model:</p>
-							{% else %}
-								<p id = "_md" name = '_md' >Model: {{mod.model}}</p>
-							{% endif %}
-							
-						</div>
+						{% if mod.image %}
+							<img src="{{ mod.image.url}}"  alt="{{file_name}} photo error" class="img-responsive">
+						{% else %}
+							<img src="{% static 'equipment/images/inv1.jpg' %}" class="img-responsive" >
+						{% endif %}
 					</div>	
 				</div>
 			</div>
@@ -250,13 +253,13 @@
 				<tbody>
 					{% for model in models %}
 						<tr>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.id}}</td>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.description}}</td>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.category}}</td>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.band}}</td>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.model}}</td>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id %}">{{model.vendor}}</td>
-							<td><a class="nav-link" href="{% url 'equipment:model' model_id=model.id">{{model.status}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.id}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.description}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.category}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.band}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.model}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.vendor}}</td>
+							<td><a class="nav-link" href="{% url 'equipment:newmodel' %}?model_id={{model.id}}">{{model.status}}</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -268,6 +271,19 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script> 
 <script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'p3plcpnl0769'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>
+<script>
+	$(document).ready(function() {
+		var name = $('#_desc').val();
+		$('#id_description').val(name);
+	});
+	
+	$(document).ready(function() {
+		// Get value on button click and show alert
+		$("#_desc").on('change', function(){
+			$("#id_description").val($(this).val());
+			});
+	});
+</script>
 </body>
 {% endblock %}
 

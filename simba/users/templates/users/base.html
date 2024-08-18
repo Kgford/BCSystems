@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="SIMBA Inventory Management" content="">
-	<link rel="icon" type="image/x-icon" href="{% static 'users/images/ats_16X16.ico' %}">
+	<link rel="icon" type="image/x-icon" href="{% static 'sales/images/ats_16X16.ico' %}">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
     <title>SIMBA Inventory Management</title>
@@ -80,29 +80,50 @@
   <div class="row">
 	<div class="col-6 col-md">
 	{% if user.is_authenticated %}
+		<h5>Retail</h5>
+		<ul class="list-unstyled text-small">
+			<li><a class="text-muted" href="{% url 'retail:dashboard' %}">Dashboard</a></li>
+		</ul>
+	{% endif %}
+	</div>
+	<div class="col-6 col-md">
+	{% if user.is_authenticated %}
+		<h5>Sales</h5>
+		<ul class="list-unstyled text-small">
+			<li><a class="text-muted" href="#">Dashboard</a></li>
+		</ul>
+	{% endif %}
+	</div>
+	<div class="col-6 col-md">
+	{% if user.is_authenticated %}
+		<h5>Services</h5>
+		<ul class="list-unstyled text-small">
+			<li><a class="text-muted" href="#">Dashboard</a></li>
+		</ul>
+	{% endif %}
+	</div>
+	<div class="col-6 col-md">
+	{% if user.is_authenticated %}
+        <h5>Contractor</h5>
+        <ul class="list-unstyled text-small">
+			<li><a class="text-muted" href="#">Dashboard</a></li>
+		</ul>
+	{% endif %}
+    </div>
+    
+	<div class="col-6 col-md">
+	{% if user.is_authenticated %}
 		<h5>Inventory</h5>
 		<ul class="list-unstyled text-small">
-			<li><a class="text-muted" href="{% url 'inventory:inven' %}">Search Inventory</a></li>
-			<li><a class="text-muted" href="{% url 'inventory:items' %}">Create new Inventory Item</a></li>
-			<li><a class="text-muted" href="{% url 'inventory:items' %}">Event History</a></li>
+			<li><a class="text-muted" href="#">Dashboard</a></li>
 		</ul>
 	{% endif %}
 	</div>
     <div class="col-6 col-md">
 	{% if user.is_authenticated %}
-        <h5>Equipment</h5>
+        <h5>Home</h5>
         <ul class="list-unstyled text-small">
-			<li><a class="text-muted" href="{% url 'inventory:equipment' %}">Search Models</a></li>
-			<li><a class="text-muted" href="{% url 'inventory:newmodel' %}">Create new Model</a></li>
-		</ul>
-	{% endif %}
-    </div>
-    <div class="col-6 col-md">
-	{% if user.is_authenticated %}
-        <h5>Site Locations</h5>
-        <ul class="list-unstyled text-small">
-	    	<li><a class="text-muted" href="{% url 'inventory:location' %}">Search locations</a></li>
-			<li><a class="text-muted" href="{% url 'inventory:location' %}">Create new Site</a></li>
+	    	<li><a class="text-muted" href="#">Dashboard</a></li>
 		</ul>
 	{% endif %}
     </div>

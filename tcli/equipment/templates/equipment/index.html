@@ -12,7 +12,10 @@
 		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
 		</button>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		<form class="form-inline mt-6 mt-md-0 col-lg-16" method="post" action="{% url 'equipment:equipment' %}">
+			{% csrf_token %}
+			<input id = "search" name = "search" onchange="this.form.submit()" size = "200" class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		</form>
 		<ul class="navbar-nav px-3">
 		  <li class="nav-item text-nowrap">
 			<a class="nav-link" href="{% url 'logout' %}">Sign out</a>
@@ -43,7 +46,7 @@
 					</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'equipment:equipment' %}">
+					<a class="nav-link" href="{% url 'equipment:newmodel' %}">
 					  <span data-feather="file"></span>
 					  Add Equipment
 					</a>
